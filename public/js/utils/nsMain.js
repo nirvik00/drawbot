@@ -62,7 +62,7 @@ var init= ()=>{
     document.addEventListener('mouseDown', onDocumentMouseDown, false);
 }
 
-function mouseDown(){}
+function onDocumentMouseDown(){}
 function onDocumentMouseMove(event){
     event.preventDefault();
     mouse.set((event.clientX/window.innerWidth)*2-1, -(event.clientY/window.innerHeight)*2+1);
