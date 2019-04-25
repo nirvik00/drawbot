@@ -5,8 +5,8 @@ const methodOverride=require('method-override');
 const fs=require('fs');
 const app=express();
 
-//use const dirname to load static js files in express-handlebars templates
-app.use('/public', express.static(process.env.PWD+'/public'))
+process.env.PWD = process.cwd()
+app.use('/public',express.static(process.env.PWD+'/public'));
 
 // this is important : templating engine : 1. main 2. partial 3. Static File outside in views
 //handlebars
