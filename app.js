@@ -27,7 +27,7 @@ app.get('/', (req, res)=>{
     res.render('nsMain');
 });
 
-const port=process.env.port || 5500;
+const port=process.env.port || 5000;
 app.listen(port, ()=>{
     console.log(`server started at port ${port}`);
 });
