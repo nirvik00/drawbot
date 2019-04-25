@@ -1,0 +1,22 @@
+{
+  "name": "proj2",
+  "version": "1.0.0",
+  "description": "web geometry app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": "10.14.1",
+    "npm": "6.4.1"
+  },
+  "author": "Nirvik Saha",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2",
+    "method-override": "^3.0.0",
+    "nodemon": "^1.18.11"
+  }
+}
