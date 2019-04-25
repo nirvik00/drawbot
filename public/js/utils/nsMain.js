@@ -4,6 +4,8 @@ var scene, camera, controls, renderer, raycaster;
 
 var mouse, rollOverMesh, rollOverMaterial;
 var cubeGeo, cubeMaterial;
+var isShiftDn=false;
+var isCtrlDn=false;
 var objects=[];
 
 var init= ()=>{
@@ -33,11 +35,14 @@ var init= ()=>{
     // prepare mouse actions
     mouse=new THREE.Vector2();
     raycaster=new THREE.Raycaster();
-    var geoPlane=new THREE.PlaneBufferGeometry(1000,1000);
-    plane=new THREE.Mesh(geoPlane, new THREE.MeshBasicMaterial({visible:false}));
+    var geoPlane=new THREE.PlaneBufferGeometry(1000,1000,20);
+    //var geoMaterial=new THREE.MeshBasicMaterial({ color:new THREE.Color("rgb(0,255,0)"), opacity:0.25, transparent:true });
+    var geoMaterial=new THREE.MeshBasicMaterial({ color:new THREE.Color("rgb(0,255,0)"), visible:false });
+    plane=new THREE.Mesh(geoPlane, geoMaterial);
     plane.rotateX(-Math.PI/2);
     scene.add(plane);
     objects.push(plane);
+    console.log(objects.length);
 
     // roll-over helpers
     var rollOverGeo=new THREE.BoxBufferGeometry(50,50,50);
@@ -47,7 +52,7 @@ var init= ()=>{
     
     //prepare basic cube
     cubeGeo=new THREE.BoxBufferGeometry(50,50,50);
-    cubeMaterial=new THREE.MeshBasicMaterial({color:new THREE.Color("rgb(255,0,0)")});
+    cubeMaterial=new THREE.MeshBasicMaterial({color:new THREE.Color("rgb(0,0,255)"), opacity:0.5, transparent:true});
     
     // camera orbit zoom
     controls=new THREE.OrbitControls(camera, renderer.domElement);
@@ -59,10 +64,55 @@ var init= ()=>{
 
     //document interaction
     document.addEventListener('mousemove', onDocumentMouseMove, false);
-    document.addEventListener('mouseDown', onDocumentMouseDown, false);
+    document.addEventListener('mousedown', onDocumentMouseDown, false);
+    document.addEventListener('keyup', onDocumentKeyUp, false);
+    document.addEventListener('keydown', onDocumentKeyDown, false);
 }
 
-function onDocumentMouseDown(){}
+function onDocumentKeyUp(event){
+    switch(event.keyCode){
+        case 16:isShiftDn=false; break;
+        case 17:isCtrlDn=false; break;
+    }
+}
+
+function onDocumentKeyDown(event){
+    switch(event.keyCode){
+        case 16:isShiftDn=true; break;
+        case 17:isCtrlDn=true; break;
+    }
+}
+
+function onDocumentMouseDown(event){
+    event.preventDefault();
+    mouse.set((event.clientX/window.innerWidth)*2-1, -(event.clientY/window.innerHeight)*2+1);
+    raycaster.setFromCamera(mouse,camera);
+    var intersects=raycaster.intersectObjects(objects);
+    console.log(intersects[0]);
+    if(intersects.length>0){        
+        var intersect=intersects[0];
+        if(isShiftDn===true && intersect.object!==plane){
+            scene.remove(intersect.object);
+            objects.splice(objects.indexOf(intersect.object), 1);
+        }
+        if(isCtrlDn===true){
+            var voxel=new THREE.Mesh(cubeGeo,cubeMaterial);
+            voxel.position.copy(intersect.point).add(intersect.face.normal);
+            var vec=intersect.face.normal;
+            if(vec.y<1){
+                vec=new THREE.Vector3(0,1,0);
+            }
+            voxel.position.copy(intersect.point).add(vec);
+            voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+            //voxel.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
+            scene.add(voxel);
+            objects.push(voxel);
+            console.log("voxel added");
+        }
+    }
+    render();
+}
+
 function onDocumentMouseMove(event){
     event.preventDefault();
     mouse.set((event.clientX/window.innerWidth)*2-1, -(event.clientY/window.innerHeight)*2+1);
@@ -78,6 +128,7 @@ function onDocumentMouseMove(event){
         rollOverMesh.position.copy(intersect.point).add(vec);
         rollOverMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
     }
+    //console.log("mouse moved");
     render();
 }
 
