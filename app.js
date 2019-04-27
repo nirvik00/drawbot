@@ -27,6 +27,26 @@ app.get('/', (req, res)=>{
     res.render('nsMain');
 });
 
+app.get('/ivBot',(req, res)=>{
+    res.render('ivBot');
+});
+
+app.get('/mcmcBot', (req, res)=>{
+    res.send("mcmcBot");
+});
+
+app.get('/2dBot', (req, res)=>{
+    res.send('2dBot');
+});
+
+app.get('/subdivBot', (req, res)=>{
+    res.send('subdiv bot');
+});
+
+app.get('/siteplanBot', (req, res)=>{
+    res.send('siteplan bot');
+});
+
 const port=process.env.PORT || 5500;
 app.listen(port, ()=>{
     console.log(`server started at port ${port}`);
