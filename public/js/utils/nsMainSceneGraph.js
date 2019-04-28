@@ -1,56 +1,41 @@
-var mainMenuRects=[];
-var geomMenuSel=false;
-var geomMenuDis=false;
+var CANVAS;//=document.getElementById("sceneGraphCanvas");
+var CTX;//=canvas.getContext("2d");
 
+var geoMenu, algMenu; // main menu
 
 window.onload=function(){
+    CANVAS=document.getElementById("sceneGraphCanvas");
+    CTX=CANVAS.getContext("2d");
+    geoMenu=new genGeoMainMenu(CTX);
+    algMenu=new genAlgMainMenu(CTX);
     draw();
 }
 
 function draw(){
-    var canvas=document.getElementById("sceneGraphCanvas");
-    var ctx=canvas.getContext("2d");
-    ctx.clearRect(0,0,canvas.width, canvas.height);
-    //array of main menu rects
-    mainMenuRects[0]=genGeoMainMenu(ctx);
+    CTX.clearRect(0,0,CANVAS.width, CANVAS.height);
+    algMenu.display();
+    geoMenu.display();
 
-    canvas.addEventListener("mousedown", doMouseDown, false);
-    canvas.addEventListener("mousemove", doMouseMove, false);
+    CANVAS.addEventListener("mousedown", doMouseDown, false);
+    CANVAS.addEventListener("mousemove", doMouseMove, false);
 
     window.requestAnimationFrame(draw); 
 }
 
-
-
 function doMouseDown(e){
     var x=e.pageX;
     var y=e.pageY;    
-    for(var i=0; i< mainMenuRects.length; i++){
-        var a=mainMenuRects[i][0]+25;
-        var b=mainMenuRects[i][1]+25;
-        var c=mainMenuRects[i][2]+25;
-        var d=mainMenuRects[i][3]+25;
-        if((x>a && x<a+c && y>b && y<b+d)){
-            geomMenuDis=true;         
-        }else{
-            geomMenuDis=false;
-        }
-    }
+    
+    algMenu.selected(x,y);
+    geoMenu.selected(x,y);
+
 }
 
 function doMouseMove(e){
     var x=e.pageX;
     var y=e.pageY;    
-    for(var i=0; i< mainMenuRects.length; i++){
-        var a=mainMenuRects[i][0]+25;
-        var b=mainMenuRects[i][1]+25;
-        var c=mainMenuRects[i][2]+25;
-        var d=mainMenuRects[i][3]+25;
-        if((x>a && x<a+c && y>b && y<b+d)){
-            geomMenuSel=true;            
-        }else{
-            geomMenuSel=false;
-            geomMenuDis=false;
-        }
-    }
+
+    algMenu.hover(x,y);
+    geoMenu.hover(x,y);
+
 }

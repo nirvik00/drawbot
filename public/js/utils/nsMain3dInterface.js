@@ -88,7 +88,7 @@ function onDocumentMouseDown(event){
     mouse.set((event.clientX/window.innerWidth)*2-1, -(event.clientY/window.innerHeight)*2+1);
     raycaster.setFromCamera(mouse,camera3);
     var intersects=raycaster.intersectObjects(objects);
-    console.log(intersects[0]);
+    //console.log(intersects[0]);
     if(intersects.length>0){        
         var intersect=intersects[0];
         if(isShiftDn===true && intersect.object!==plane){
