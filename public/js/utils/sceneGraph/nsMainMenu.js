@@ -43,7 +43,6 @@ var genGeo2dMainMenu=function(ctx){
 }
 
 
-
 var genAlgMainMenu=function(ctx){
     this.X=130;
     this.Y=0;
@@ -83,7 +82,7 @@ var genAlgMainMenu=function(ctx){
         this.ctx.fillStyle=this.colr;
         this.ctx.fillRect(this.X,this.Y,this.L,this.W);
         this.ctx.fillStyle="rgb(255,255,255)";
-        this.ctx.fillText("Algorithm", this.X+20, this.Y+30); 
+        this.ctx.fillText("Algorithms", this.X+12, this.Y+30); 
     }
 }
 
