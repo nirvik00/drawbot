@@ -18,20 +18,29 @@
     <div id = "Scene3d"></div>
 </div>
 <script src="/public/js/utils/nsMain3dInterface.js"></script>
-
-<textarea id="mainMenuInfo" name="mainMenuName" style="display:none" required>null</textarea>
-
 <canvas id="sceneGraphCanvas" height="500" width="500" style="position:absolute; left:20px; top:25px"></canvas>
 
-<script type="text/javascript">
-    function download(){
-        var content = document.getElementById("information").innerHTML;
-        if(content==="null"|| content.trim()==""){
-            alert("first generate the OBJ file- option above");
-        }else{
-            var nameOfFile=document.getElementById("name").value+"."+"obj";
-            var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-            saveAs(blob, nameOfFile);
+
+<!--
+ajax download:
+
+    <textarea id="mainMenuInfo" name="mainMenuName" style="display:none" required>null</textarea>
+    <script type="text/javascript">
+        function download(){
+            var content = document.getElementById("information").innerHTML;
+            if(content==="null"|| content.trim()==""){
+                alert("first generate the OBJ file- option above");
+            }else{
+                var nameOfFile=document.getElementById("name").value+"."+"obj";
+                var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+                saveAs(blob, nameOfFile);
+            }
         }
-    }
-</script>
+    </script>
+-->
+
+
+
+
+
+
