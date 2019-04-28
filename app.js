@@ -24,28 +24,9 @@ app.use(methodOverride('_method'));
 
 app.get('/', (req, res)=>{
     //fs.writeFileSync(__dirname+'/public/files/hello.txt', "hello world!");
-    res.render('ivBot');
+    res.render('nsMain');
 });
 
-app.get('/ivBot',(req, res)=>{
-    res.render('ivBot');
-});
-
-app.get('/mcmcBot', (req, res)=>{
-    res.render("mcmcBot");
-});
-
-app.get('/2dBot', (req, res)=>{
-    res.render('2dBot');
-});
-
-app.get('/floorplanBot', (req, res)=>{
-    res.render('floorplanBot');
-});
-
-app.get('/siteplanBot', (req, res)=>{
-    res.render('siteplanBot');
-});
 
 const port=process.env.PORT || 5500;
 app.listen(port, ()=>{

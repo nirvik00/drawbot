@@ -1,6 +1,6 @@
 var scene3d=document.getElementById('Scene3d');
-
-var scene, camera, controls, renderer, raycaster;
+// cannot use camera - p5 internal word
+var scene, camera3, controls, renderer, raycaster;
 
 var mouse, rollOverMesh, rollOverMaterial;
 var cubeGeo, cubeMaterial;
@@ -13,10 +13,10 @@ var init= ()=>{
     scene=new THREE.Scene();
     scene.background=new THREE.Color("rgb(255,255,255)");
     
-    //prepare the camera
-    camera=new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 10000);
-    camera.position.set(500,500,1000);
-    camera.lookAt(0,0,0);
+    //prepare the camera3
+    camera3=new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 10000);
+    camera3.position.set(500,500,1000);
+    camera3.lookAt(0,0,0);
     
     //prepare the webGL render
     renderer=new THREE.WebGLRenderer();
@@ -54,8 +54,8 @@ var init= ()=>{
     cubeGeo=new THREE.BoxBufferGeometry(50,50,50);
     cubeMaterial=new THREE.MeshBasicMaterial({color:new THREE.Color("rgb(0,0,255)"), opacity:0.5, transparent:true});
     
-    // camera orbit zoom
-    controls=new THREE.OrbitControls(camera, renderer.domElement);
+    // camera3 orbit zoom
+    controls=new THREE.OrbitControls(camera3, renderer.domElement);
     controls.addEventListener('change', render);
     controls.enableZoom=true;
 
@@ -86,7 +86,7 @@ function onDocumentKeyDown(event){
 function onDocumentMouseDown(event){
     event.preventDefault();
     mouse.set((event.clientX/window.innerWidth)*2-1, -(event.clientY/window.innerHeight)*2+1);
-    raycaster.setFromCamera(mouse,camera);
+    raycaster.setFromCamera(mouse,camera3);
     var intersects=raycaster.intersectObjects(objects);
     console.log(intersects[0]);
     if(intersects.length>0){        
@@ -116,7 +116,7 @@ function onDocumentMouseDown(event){
 function onDocumentMouseMove(event){
     event.preventDefault();
     mouse.set((event.clientX/window.innerWidth)*2-1, -(event.clientY/window.innerHeight)*2+1);
-    raycaster.setFromCamera(mouse, camera);
+    raycaster.setFromCamera(mouse, camera3);
     var intersects = raycaster.intersectObjects(objects);
     if ( intersects.length > 0 ) {
         var intersect = intersects[0];
@@ -139,12 +139,12 @@ function mainLoop(){
 }
 
 function render(){
-    renderer.render(scene,camera);
+    renderer.render(scene,camera3);
 }
 
 function onWindowResize(){
-    camera.aspect=window.innerWidth/window.innerHeight;
-    camera.updateProjectionMatrix();
+    camera3.aspect=window.innerWidth/window.innerHeight;
+    camera3.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
