@@ -26,9 +26,14 @@ function doMouseDown(e){
     var x=e.pageX;
     var y=e.pageY;    
     
-    algMenu.selected(x,y);
-    geoMenu.selected(x,y);
-
+    var t=algMenu.selected(x,y);
+    if(t===true){
+        geoMenu.mousedown=false;
+    }
+    var g=geoMenu.selected(x,y);
+    if(g===true){
+        algMenu.mousedown=false;
+    }
 }
 
 function doMouseMove(e){

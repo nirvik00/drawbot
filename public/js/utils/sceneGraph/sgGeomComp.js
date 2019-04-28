@@ -29,7 +29,7 @@ var genGeoMainMenu=function(ctx){
         if(hover===true && sel===false){
             this.colr="rgb(155,50,50)";
         }
-        else if(hover===true && sel===true){
+        else if(sel===true){
             this.colr="rgb(255,0,0)";
         }else{
             this.colr="rgb(0,0,0)";
@@ -41,8 +41,6 @@ var genGeoMainMenu=function(ctx){
         this.ctx.fillText("Geometry", 15, 30); 
     }
 }
-
-
 
 var genAlgMainMenu=function(ctx){
     this.X=130;
@@ -74,7 +72,7 @@ var genAlgMainMenu=function(ctx){
         if(hover===true && sel===false){
             this.colr="rgb(155,50,50)";
         }
-        else if(hover===true && sel===true){
+        else if(sel===true){
             this.colr="rgb(255,0,0)";
         }else{
             this.colr="rgb(0,0,0)";
@@ -85,11 +83,4 @@ var genAlgMainMenu=function(ctx){
         this.ctx.fillStyle="rgb(255,255,255)";
         this.ctx.fillText("Algorithm", 150, 30); 
     }
-}
-
-
-var newObj=function(){
-    this.name="ok";
-    this.x=10;
-    this.y=20;
 }
