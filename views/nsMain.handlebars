@@ -5,42 +5,63 @@
      #container{
         position:relative;
     }
-    scene3d{
+    #scene3d{
         border: 1px solid black;
     }
     body{
         margin:0;
     }
+    #menu{
+        width : 30%;
+        height : 10%;
+        position : relative;
+        left : 10px;
+        top : 25px;
+    }
+    #floating {
+        color : #ffffff;
+        background : #000000;
+        opacity : 0.5;
+        width : 30%;
+        height : 80%;
+        position : absolute;
+        left : 30%;
+        top : 10%;
+        border : 1px solid #555555;
+        padding : 10px;
+        display : none;
+        overflow : auto;
+        z-index: 100;
+    }
+    span.link{
+        color:black;
+        cursor:pointer;
+        text-decoration:underline;
+    }
+    a{
+        color:skyblue;
+    }
 </style>
 
+<div id="menu">
+    <h4 id="show-menu">SHOW MENU</h4>
+    <h4 id="hide-menu">HIDE MENU</h4>
+</div>
 
+<div id="hidden">
+    <textarea id="elements" hidden></textarea>
+</div>
 <div id="container" >
     <div id = "Scene3d"></div>
 </div>
+<script src="/public/js/utils/nsGlobalVariables.js"></script>
+<script src="/public/js/utils/nsGeomLib.js"></script>
+<script src="/public/js/utils/nsMainMenu3dInterface.js"></script>
+<script src="/public/js/utils/nsGenGeomMenu.js"></script>
 <script src="/public/js/utils/nsMain3dInterface.js"></script>
-<canvas id="sceneGraphCanvas" height="500" width="500" style="position:absolute; left:20px; top:25px"></canvas>
 
 
-<!--
-ajax download:
-
-    <textarea id="mainMenuInfo" name="mainMenuName" style="display:none" required>null</textarea>
-    <script type="text/javascript">
-        function download(){
-            var content = document.getElementById("information").innerHTML;
-            if(content==="null"|| content.trim()==""){
-                alert("first generate the OBJ file- option above");
-            }else{
-                var nameOfFile=document.getElementById("name").value+"."+"obj";
-                var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-                saveAs(blob, nameOfFile);
-            }
-        }
-    </script>
--->
-
-
-
-
-
+<script>
+    createMenu();
+</script>
 

@@ -1,12 +1,4 @@
-var scene3d=document.getElementById('Scene3d');
-// cannot use camera - p5 internal word
-var scene, camera3, controls, renderer, raycaster;
 
-var mouse, rollOverMesh, rollOverMaterial;
-var cubeGeo, cubeMaterial;
-var isShiftDn=false;
-var isCtrlDn=false;
-var objects=[];
 
 var init= ()=>{
     //prepare the scene
@@ -128,13 +120,13 @@ function onDocumentMouseMove(event){
         rollOverMesh.position.copy(intersect.point).add(vec);
         rollOverMesh.position.divideScalar(50).floor().multiplyScalar(50).addScalar(25);
     }
-    //console.log("mouse moved");
+    //createMenu();
     render();
 }
 
-
 function mainLoop(){
     requestAnimationFrame(mainLoop);
+    generateGeometryFromMenu();
     render();
 }
 
@@ -159,6 +151,9 @@ var debugSphere=function(p,r){
     mesh.position.z = p.z; 
     return mesh;
 }
+
+
+
   
 
 init();
