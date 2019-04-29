@@ -16,11 +16,9 @@ function mouseDownListener(e){
 
 function mouseUpListener(e){
     dragging=false;
-    //
     for(var i=0; i<SceneElementsArr.length; i++){
         var obj=SceneElementsArr[i];
         if(obj.selected===true){
-            console.log("released: "+obj.name);
             obj.cx=getMousePosition(e).x;
             obj.cy=getMousePosition(e).y;
             obj.selected=false;
@@ -37,7 +35,7 @@ function mouseMoveListener(e){
     if(dragging){
         for(var i=0; i<SceneElementsArr.length; i++){
             var obj=SceneElementsArr[i];
-            var t=obj.contains(mx,my);
+            var t=contains(obj,mx,my);
             if(t){
                 obj.selected=true;
                 console.log("selected: "+obj.name);
@@ -60,7 +58,7 @@ function redrawCanvas(){
     CANVASCONTEXT.clearRect(0, 0, CANVAS.width, CANVAS.height);
     for(var i=0; i<SceneElementsArr.length; i++){
         var obj=SceneElementsArr[i];
-        obj.generateNodeGeom();    
+        drawNodeGeom(obj);    
     }
     CANVASCONTEXT.strokeRect(getMousePosition.x, getMousePosition.y, 10, 10);
 }

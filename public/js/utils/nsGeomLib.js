@@ -16,6 +16,7 @@ var nsPt=function(x,y,z){
     this.mesh;
     this.geo;
     this.mat;
+    this.colr="rgb(255,0,0,100)";
     this.generateGeometry3d=function(){   
         var x,y,z;
         if(this.x===0 && this.y===0 && this.z===0){
@@ -33,33 +34,6 @@ var nsPt=function(x,y,z){
         this.mesh.position.z=z;
         scene.add(this.mesh);
     }
-    this.generateNodeGeom=function(){//first when coords =0
-        if(this.cx===0 && this.cy===0){
-            this.cx=Math.random()*100+20;
-            this.cy=Math.random()*100+20;
-        }
-        CANVASCONTEXT.globalAlpha=0.2;
-        CANVASCONTEXT.fillStyle="rgb(255,0,0,100)";
-        CANVASCONTEXT.fillRect(this.cx,this.cy,this.cLe, this.cWi);
-        CANVASCONTEXT.globalAlpha=1.0;
-        CANVASCONTEXT.fillStyle="rgb(0,0,0)";
-        CANVASCONTEXT.strokeRect(this.cx,this.cy,this.cLe,this.cWi);
-    }
-    this.drawNodeGeom=function(){ //after dragging
-        CANVASCONTEXT.globalAlpha=0.2;
-        CANVASCONTEXT.fillStyle="rgb(255,0,0,100)";
-        CANVASCONTEXT.fillRect(this.cx,this.cy,this.cLe, this.cWi);
-        CANVASCONTEXT.globalAlpha=1.0;
-        CANVASCONTEXT.fillStyle="rgb(0,0,0)";
-        CANVASCONTEXT.strokeRect(this.cx,this.cy,this.cLe,this.cWi);
-    }
-
-    this.contains=function(mx, my){
-        if(mx>this.cx && mx<this.cx+this.cLe && my>this.cy && my<this.cy+this.cWi){
-            return true;
-        }
-        return false;
-    }
 }
 
 var nsLine=function(p,q){
@@ -72,6 +46,7 @@ var nsLine=function(p,q){
     this.cLe=50; //for canvas
     this.cWi=50; //for canvas
     this.selected=false; //for canvas
+    this.colr="rgb(0,0,255)";
     this.generateGeometry3d=function(){
         if(p.x===0 && p.y===0 && p.z===0 && q.x===0 && q.y===0 && q.z===0){
             p.x=Math.random()*5;
@@ -90,38 +65,35 @@ var nsLine=function(p,q){
         this.mesh= new THREE.Line( geo, mat);
         scene.add(this.mesh);
     }
-    this.generateNodeGeom=function(){
-        if(this.cx===0 && this.cy===0){
-            this.cx=Math.random()*100+20;
-            this.cy=Math.random()*100+20;
-        }else{
-            x=this.cx;
-            y=this.cy;
-        }
-        CANVASCONTEXT.globalAlpha=0.2;
-        CANVASCONTEXT.fillStyle="rgb(0,0,255)";
-        CANVASCONTEXT.fillRect(this.cx,this.cy,this.cLe, this.cWi);
-        CANVASCONTEXT.globalAlpha=1.0;
-        CANVASCONTEXT.fillStyle="rgb(0,0,0)";
-        CANVASCONTEXT.strokeRect(this.cx,this.cy,this.cLe, this.cWi);
-    }
-    this.drawNodeGeom=function(){ //after dragging
-        CANVASCONTEXT.globalAlpha=0.2;
-        CANVASCONTEXT.fillStyle="rgb(255,0,0,100)";
-        CANVASCONTEXT.fillRect(this.cx,this.cy,this.cLe, this.cWi);
-        CANVASCONTEXT.globalAlpha=1.0;
-        CANVASCONTEXT.fillStyle="rgb(0,0,0)";
-        CANVASCONTEXT.strokeRect(this.cx,this.cy,this.cLe,this.cWi);
-    }
-    this.contains=function(mx, my){
-        if(mx>this.cx && mx<this.cx+this.cLe && my>this.cy && my<this.cy+this.cWi){
-            return true;
-        }
-        return false;
-    }
-
 }
 
+var initNodeGeom=function(obj){
+    if(obj.cx<1 && obj.cy<1){
+        obj.cx=Math.random()*400+20;
+        obj.cy=Math.random()*400+20;
+    }
+    console.log("init- name: "+obj.name+" "+obj.cx+","+ obj.cy);
+    CANVASCONTEXT.globalAlpha=0.2;
+    CANVASCONTEXT.fillStyle=obj.colr;
+    CANVASCONTEXT.fillRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
+    CANVASCONTEXT.globalAlpha=1.0;
+    CANVASCONTEXT.fillStyle="rgb(0,0,0)";
+    CANVASCONTEXT.strokeRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
+}
+var drawNodeGeom=function(obj){ //after dragging
+    CANVASCONTEXT.globalAlpha=0.2;
+    CANVASCONTEXT.fillStyle=obj.colr;
+    CANVASCONTEXT.fillRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
+    CANVASCONTEXT.globalAlpha=1.0;
+    CANVASCONTEXT.fillStyle="rgb(0,0,0)";
+    CANVASCONTEXT.strokeRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
+}
+this.contains=function(obj,mx,my){
+    if(mx>obj.cx && mx<obj.cx+obj.cLe && my>obj.cy && my<obj.cy+obj.cWi){
+        return true;
+    }
+    return false;
+}
 
 var Di=function(a,b){
     return Math.sqrt(Math.pow((a.x-b.x),2)+ Math.pow((a.y-b.y),2)+Math.pow((a.z-b.z),2));

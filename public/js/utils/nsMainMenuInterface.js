@@ -12,7 +12,8 @@ var createMenu=function(){
     Point.addEventListener('click', function(){
         var p=new nsPt(0,0,0);
         p.generateGeometry3d();
-        p.generateNodeGeom();
+        //p.generateNodeGeom();
+        initNodeGeom(p);
         //console.log(p);
         SceneElementsArr.push(p);
         displaySceneElements();
@@ -27,7 +28,8 @@ var createMenu=function(){
         var q=new nsPt(0,0,0);
         var l=new nsLine(p,q);
         l.generateGeometry3d();
-        l.generateNodeGeom();
+        //l.generateNodeGeom();
+        initNodeGeom(l);
         SceneElementsArr.push(l);
         //console.log(l);
         displaySceneElements();
