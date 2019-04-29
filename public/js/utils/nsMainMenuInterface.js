@@ -35,15 +35,19 @@ var createMenu=function(){
     });
     
     var endButton=document.createElement("BUTTON");
+    endButton.className="button";
     endButton.innerHTML="END";
     FloatingDiv.appendChild(endButton);
 
-    document.getElementById("show-menu").addEventListener('click', function(){
+    document.getElementById("geom-menu").addEventListener('click', function(){
         FloatingDiv.style.display='block';
     }); 
     document.getElementById("hide-menu").addEventListener('click', function(){
         FloatingDiv.style.display='none';
     }); 
+    endButton.addEventListener('click', function(){
+        FloatingDiv.style.display='none';
+    });
 }
 
 var displaySceneElements=function(){

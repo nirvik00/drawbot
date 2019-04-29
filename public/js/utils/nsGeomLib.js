@@ -9,7 +9,7 @@ var nsPt=function(x,y,z){
     this.mesh;
     this.geo;
     this.mat;
-    this.generateGeometry=function(){        
+    this.generateGeometry3d=function(){        
         this.geo=new THREE.SphereBufferGeometry(this.r,10,10);
         this.mat=new THREE.MeshBasicMaterial({
             color: 0xffff00
@@ -18,16 +18,16 @@ var nsPt=function(x,y,z){
         this.mesh.position.x=this.x;
         this.mesh.position.y=this.y;
         this.mesh.position.z=this.z;
-        scene.add(this.mesh);
+        //scene.add(this.mesh);
     }
-    this.genSelectedGeometry=function(){     
+    this.genSelectedGeometry3d=function(){     
         this.geo=new THREE.SphereBufferGeometry(this.r*0.95,10,10);
         this.mat = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
         this.mesh=new THREE.Mesh(this.geo,this.mat);
         this.mesh.position.x=this.x;
         this.mesh.position.y=this.y;
         this.mesh.position.z=this.z;
-        scene.add(this.mesh);
+        //scene.add(this.mesh);
         console.log("generate selected mesh");
     }
 }

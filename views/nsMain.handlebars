@@ -1,27 +1,49 @@
 <style>
-    #sceneGraphCanvas{
-        border:1px solid grey;
-    }
-     #container{
-     z-index : 0;
-        position:absolute;
-    }
     #menu{
         z-index : 3;
         position : absolute;
         left : 10px;
         top : 25px;        
-        width : 30%;
+        width : 12%;
         height : 10%;        
+    }
+    p.elements-menu{
+        color: black;
+        background-color:yellow;
+        font-family: courier;
+        font-size: 160%;
+    }
+    p.elements-menu:hover{
+        background-color:red;
+    }
+    #containers{
+        z-index : 0;
+        position:absolute;
+        left:200px;
+        top: 35px;
+        overflow:hidden;
+    }
+    #threeviewer-container{
+        
+        margin-left:550px;
+    }
+    #canvas-viewer{
+        //border:1px solid grey;
+        width:500px;
+        height:500px;
+        float:left;
+    }
+    #three-viewer{
+        //border:1px solid red;
     }
     #floating {
         color : #ffffff;
         background : #000000;
         opacity : 0.5;
-        width : 30%;
-        height : 80%;
+        width : 50%;
+        height : 40%;
         position : absolute;
-        left : 30%;
+        left : 20%;
         top : 10%;
         border : 1px solid #555555;
         padding : 10px;
@@ -30,20 +52,15 @@
     }
     body{
         margin:0;
-    }
- 
- 
+    } 
     span.link{
         color:black;
         cursor:pointer;
         text-decoration:underline;
-    }
-    a{
-        color:skyblue;
-    }
+    }    
     .button {
         background-color: #4CAF50; /* Green */
-        border: none;
+        border: 1px solid black;
         color: white;
         padding: 15px 32px;
         text-align: center;
@@ -51,21 +68,39 @@
         display: inline-block;
         font-size: 16px;
     }
+    .button:hover{
+        background-color:red;
+    }
+
 </style>
 
 <div id="menu">
-    <h4 id="show-menu">SHOW MENU</h4>
-    <h4 id="hide-menu">HIDE MENU</h4>
+    <p class="elements-menu" id="geom-menu">Geometry</p>
+    <p class="elements-menu"  id="hide-menu">HIDE MENU</p>
 </div>
 
-<div id="container" >
-    <div id = "Scene3d"></div>
+<div id="containers">
+    <div id="canvas-container">
+        <canvas id = "canvas-viewer" ></canvas>
+    </div>
+    <div id="threeviewer-container">
+        <div id = "three-viewer" style="left:200px"></div>
+    </div>
 </div>
+
 <script src="/public/js/utils/nsGlobalVariables.js"></script>
 <script src="/public/js/utils/nsGeomLib.js"></script>
-<script src="/public/js/utils/nsMainMenu3dInterface.js"></script>
 <script src="/public/js/utils/nsGenGeomMenu.js"></script>
+<script src="/public/js/utils/nsMainMenuInterface.js"></script>
+
+
+
+
 <script src="/public/js/utils/nsMain3dInterface.js"></script>
+
+
+
+
 
 
 <script>
