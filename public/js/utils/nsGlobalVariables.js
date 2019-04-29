@@ -1,5 +1,7 @@
 var SceneElementsArr=[]; //track of all elements requested
+var ElementCounter=0;
 var FloatingDiv; // main menu
+
 
 var CANVAS, CANVASCONTEXT;
 var dragging=false;

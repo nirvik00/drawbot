@@ -11,10 +11,12 @@ var createMenu=function(){
     FloatingDiv.appendChild(Point);
     Point.addEventListener('click', function(){
         var p=new nsPt(0,0,0);
+        p.id=ElementCounter;
         p.generateGeometry3d();
         initNodeGeom(p);
         SceneElementsArr.push(p);
         displaySceneElements();
+        ElementCounter++;
     });
 
     var Line=document.createElement("BUTTON");
@@ -26,11 +28,11 @@ var createMenu=function(){
         var q=new nsPt(0,0,0);
         var l=new nsLine(p,q);
         l.generateGeometry3d();
-        //l.generateNodeGeom();
+        l.id=ElementCounter;
         initNodeGeom(l);
         SceneElementsArr.push(l);
-        //console.log(l);
         displaySceneElements();
+        ElementCounter++;
     });
     
     var endButton=document.createElement("BUTTON");

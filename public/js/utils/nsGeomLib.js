@@ -4,7 +4,7 @@ var nsPt=function(x,y,z){
     this.x=x; //for 3d-viewer
     this.y=y; //for 3d-viewer
     this.z=z; //for 3d-viewer
-
+    this.id=0;
     this.cx=x; //for canvas
     this.cy=y; //for canvas
     this.cLe=50; //for canvas
@@ -48,6 +48,7 @@ var nsLine=function(p,q){
     this.P=p;
     this.Q=q;
     this.mesh;
+    this.id=0;
     this.cx=0; //for canvas
     this.cy=0; //for canvas
     this.cLe=50; //for canvas

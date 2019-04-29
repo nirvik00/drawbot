@@ -64,8 +64,13 @@ function redrawCanvas(){
 var constructProperty= function(obj){   
     if(obj.name==="POINT"){
         setPoint(obj);
+    }else if(obj.name==="LINE"){
+        setLine(obj);
     }
 } 
+var setLine=function(obj){
+    
+}
 var setPoint=function(obj){
         var tbl=document.getElementById("property-table");
         while (tbl.hasChildNodes()){
@@ -76,7 +81,7 @@ var setPoint=function(obj){
         var td1=document.createElement("td");
         var td2=document.createElement("td");
         td1.innerHTML=obj.name;
-        td2.innerHTML="ENter Values";
+        td2.innerHTML="ENter Values" + obj.id;
         tbl.appendChild(tr1);
         tr1.appendChild(td1);
         tr1.appendChild(td2);
@@ -108,7 +113,6 @@ var setPoint=function(obj){
         trZ.appendChild(z0);
         trZ.appendChild(Z);
 
-
         var trEnd=document.createElement("tr");
         var submit=document.createElement("button");
         submit.innerHTML="SUBMIT";
@@ -137,6 +141,5 @@ var setPoint=function(obj){
             obj.z=rz;
             obj.generateGeometry3d();   
              console.log(obj.x, obj.y, obj.z);
-        });  
-        
+        });          
 }
