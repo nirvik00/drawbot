@@ -45,8 +45,8 @@ var nsPt=function(x,y,z){
 
 var nsLine=function(p,q){
     this.name="LINE";
-    this.P=p;
-    this.Q=q;
+    this.p=p;
+    this.q=q;
     this.mesh;
     this.id=0;
     this.cx=0; //for canvas
@@ -56,24 +56,30 @@ var nsLine=function(p,q){
     this.selected=false; //for canvas
     this.colr="rgb(0,0,255)";
     this.generateGeometry3d=function(){
-        if(p.x===0 && p.y===0 && p.z===0 && q.x===0 && q.y===0 && q.z===0){
-            p.x=Math.random()*5;
-            p.y=Math.random()*5;
-            p.z=Math.random()*2;
-            q.x=Math.random()*5;
-            q.y=Math.random()*5;
-            q.z=Math.random()*5;
+        try{
+            this.mesh.geometry.dispose();
+            this.mesh.material.dispose();
+            scene.remove(this.mesh);
+        }catch(e){
+            console.log("gen point");
+        }
+        if(this.p.x===0 && this.p.y===0 && this.p.z===0 && this.q.x===0 && this.q.y===0 && this.q.z===0){
+            this.p.x=Math.random()*5;
+            this.p.y=Math.random()*5;
+            this.p.z=Math.random()*2;
+            this.q.x=Math.random()*5;
+            this.q.y=Math.random()*5;
+            this.q.z=Math.random()*5;
         }
         var geo = new THREE.Geometry();
-        geo.vertices.push(new THREE.Vector3(p.x,p.y,p.z));
-        geo.vertices.push(new THREE.Vector3(q.x,q.y,q.z));
+        geo.vertices.push(new THREE.Vector3(this.p.x,this.p.y,this.p.z));
+        geo.vertices.push(new THREE.Vector3(this.q.x,this.q.y,this.q.z));
         var mat=new THREE.LineBasicMaterial({ 
                color: new THREE.Color("rgb(0,0,255)") 
         });
         this.mesh= new THREE.Line( geo, mat);
         scene.add(this.mesh);
     }
-    this.propertyList={"p":this.P, "q":this.Q};
 }
 
 var initNodeGeom=function(obj){

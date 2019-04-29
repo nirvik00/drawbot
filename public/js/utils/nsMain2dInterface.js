@@ -68,20 +68,68 @@ var constructProperty= function(obj){
         setLine(obj);
     }
 } 
+
 var setLine=function(obj){
+    var tbl=document.getElementById("property-table");
+    while (tbl.hasChildNodes()){
+        tbl.removeChild(tbl.firstChild);
+    }        
+    var tr1=document.createElement("tr");
+    var td1=document.createElement("td");
+    var td2=document.createElement("td");
+    td1.innerHTML=obj.name+""+obj.id;
+    td2.innerHTML="Enter Values";
+    tbl.appendChild(tr1);
+    tr1.appendChild(td1);
+    tr1.appendChild(td2);
+
+    var trP=document.createElement('tr');
+    var P0=document.createElement('td');
+    P0.innerHTML="start Point (name) : ";
+    var P=document.createElement("input");
+    tbl.appendChild(trP);
+    trP.appendChild(P0);
+    trP.appendChild(P);
     
+    var trQ=document.createElement('tr');
+    var Q0=document.createElement('td');
+    Q0.innerHTML="end Point (name) : ";
+    var Q=document.createElement("input");
+    tbl.appendChild(trQ);
+    trQ.appendChild(Q0);
+    trQ.appendChild(Q);
+
+    var trEnd=document.createElement("tr");
+    var submit=document.createElement("button");
+    submit.innerHTML="SUBMIT";
+    tbl.appendChild(trEnd);
+    trEnd.appendChild(submit);
+
+    submit.addEventListener('click', function(e){
+        for(var i=0; i<SceneElementsArr.length; i++){
+            var obj2=SceneElementsArr[i];
+            var t=obj2.name+""+obj2.id;
+            if(P.value===t){
+                obj.p=obj2;
+            }else if(Q.value===t){
+                obj.q=obj2;
+            }
+        }
+        obj.generateGeometry3d();
+    });
+
 }
+
 var setPoint=function(obj){
         var tbl=document.getElementById("property-table");
         while (tbl.hasChildNodes()){
             tbl.removeChild(tbl.firstChild);
-        }
-        
+        }        
         var tr1=document.createElement("tr");
         var td1=document.createElement("td");
         var td2=document.createElement("td");
-        td1.innerHTML=obj.name;
-        td2.innerHTML="ENter Values" + obj.id;
+        td1.innerHTML=obj.name+""+obj.id;
+        td2.innerHTML="Enter Values";
         tbl.appendChild(tr1);
         tr1.appendChild(td1);
         tr1.appendChild(td2);
