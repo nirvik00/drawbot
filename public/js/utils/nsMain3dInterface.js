@@ -1,6 +1,4 @@
 
-
-
 var init=function(){
     scene=new THREE.Scene();
     scene.background=new THREE.Color("rgb(255,255,255)");
@@ -29,7 +27,7 @@ var init=function(){
     controls.addEventListener('change', render);
     controls.enableZoom=true;
 
-    console.log(SceneElementsArr.length);
+    //console.log(SceneElementsArr.length);
 }
 
 var mainLoop=function(){

@@ -10,12 +10,10 @@ var createMenu=function(){
     Point.className="button";
     FloatingDiv.appendChild(Point);
     Point.addEventListener('click', function(){
-        var x=Math.random()*10;
-        var y=Math.random()*10;
-        var z=0.0;
-        var p=new nsPt(x,y,z);
-        p.generateGeometry();
-        console.log(p);
+        var p=new nsPt(0,0,0);
+        p.generateGeometry3d();
+        p.generateNodeGeom();
+        //console.log(p);
         SceneElementsArr.push(p);
         displaySceneElements();
     });
@@ -26,17 +24,18 @@ var createMenu=function(){
     FloatingDiv.appendChild(Line);
     Line.addEventListener('click', function(){
         var p=new nsPt(0,0,0);
-        var q=new nsPt(10,2,5);
+        var q=new nsPt(0,0,0);
         var l=new nsLine(p,q);
-        l.generateGeometry();
+        l.generateGeometry3d();
+        l.generateNodeGeom();
         SceneElementsArr.push(l);
-        console.log(l);
+        //console.log(l);
         displaySceneElements();
     });
     
     var endButton=document.createElement("BUTTON");
     endButton.className="button";
-    endButton.innerHTML="END";
+    endButton.innerHTML="CLOSE";
     FloatingDiv.appendChild(endButton);
 
     document.getElementById("geom-menu").addEventListener('click', function(){

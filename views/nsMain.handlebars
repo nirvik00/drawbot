@@ -1,4 +1,11 @@
+<!--
 <style>
+    #canvas-viewer{
+        border:1px solid grey;
+        width:500px;
+        height:500px;
+        float:left;
+    }
     #menu{
         z-index : 3;
         position : absolute;
@@ -17,22 +24,12 @@
         background-color:red;
     }
     #containers{
-        z-index : 0;
-        position:absolute;
-        left:200px;
-        top: 35px;
         overflow:hidden;
     }
+
     #threeviewer-container{
-        
         margin-left:550px;
-    }
-    #canvas-viewer{
-        //border:1px solid grey;
-        width:500px;
-        height:500px;
-        float:left;
-    }
+    }    
     #three-viewer{
         //border:1px solid red;
     }
@@ -71,21 +68,81 @@
     .button:hover{
         background-color:red;
     }
+    #property-table{
+        position:absolute;
+        top:70%;
+        left:10%;
+    }
 
 </style>
+-->
+
+<style>
+    #canvas-viewer{
+        border:1px solid grey;
+        position:relative;
+        float:left;
+    }
+    #containers{
+        overflow:hidden;
+    }
+
+    #three-viewer{
+        border:1px solid grey;
+        margin-left:750px;
+    }  
+    #floating {
+        color : #ffffff;
+        background : #000000;
+        opacity : 0.5;
+        width : 20%;
+        height : 40%;
+        position : absolute;
+        left : 50%;
+        top : 10%;
+        border : 1px solid #555555;
+        padding : 10px;
+        display : none;
+        overflow : auto;    
+        z-index=10;    
+    }
+    #menu{
+        z-index : 3;
+        position : absolute;
+        left : 550px;
+        top : 25px;        
+        width : 12%;
+        height : 10%;        
+    }
+    p.elements-menu{
+        color: black;
+        background-color:yellow;
+        font-family: courier;
+        font-size: 160%;
+    }
+    p.elements-menu:hover{
+        background-color:red;
+    }
+</style>
+
+<div id="containers">
+    <canvas id = "canvas-viewer" height="500" width="500"></canvas>
+    <div id="threeviewer-container">
+        <div id = "three-viewer"></div>
+    </div>
+</div>
 
 <div id="menu">
     <p class="elements-menu" id="geom-menu">Geometry</p>
     <p class="elements-menu"  id="hide-menu">HIDE MENU</p>
 </div>
 
-<div id="containers">
-    <div id="canvas-container">
-        <canvas id = "canvas-viewer" ></canvas>
-    </div>
-    <div id="threeviewer-container">
-        <div id = "three-viewer" style="left:200px"></div>
-    </div>
+<!--<script src="/public/js/utils/nsDraw2d.js"></script>-->
+
+<div id="property-table">
+    <table>
+        <p>Property table</p>
+    </table>
 </div>
 
 <script src="/public/js/utils/nsGlobalVariables.js"></script>
@@ -93,17 +150,9 @@
 <script src="/public/js/utils/nsGenGeomMenu.js"></script>
 <script src="/public/js/utils/nsMainMenuInterface.js"></script>
 
-
-
-
-<script src="/public/js/utils/nsMain3dInterface.js"></script>
-
-
-
-
-
-
 <script>
     createMenu();
 </script>
 
+<script src="/public/js/utils/nsMain2dInterface.js"></script>
+<script src="/public/js/utils/nsMain3dInterface.js"></script>
