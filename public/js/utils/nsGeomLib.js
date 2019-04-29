@@ -95,7 +95,7 @@ var initNodeGeom=function(obj){
     CANVASCONTEXT.fillStyle="rgb(0,0,0)";
     CANVASCONTEXT.strokeRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
     CANVASCONTEXT.font = "10px Arial";
-    CANVASCONTEXT.fillText(obj.name, obj.cx, obj.cy);
+    CANVASCONTEXT.fillText(obj.name+""+obj.id, obj.cx, obj.cy);
 }
 var drawNodeGeom=function(obj){ //after dragging
     CANVASCONTEXT.globalAlpha=0.2;
@@ -105,7 +105,7 @@ var drawNodeGeom=function(obj){ //after dragging
     CANVASCONTEXT.fillStyle="rgb(0,0,0)";
     CANVASCONTEXT.strokeRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
     CANVASCONTEXT.font = "10px Arial";
-    CANVASCONTEXT.fillText(obj.name, obj.cx, obj.cy);
+    CANVASCONTEXT.fillText(obj.name+""+obj.id, obj.cx, obj.cy);
 }
 this.contains=function(obj,mx,my){
     if(mx>obj.cx && mx<obj.cx+obj.cLe && my>obj.cy && my<obj.cy+obj.cWi){
