@@ -136,6 +136,9 @@
     .button:hover{
         background-color:red;
     }
+    #property-table{
+        border:1px solid grey;
+    }
 </style>
 
 <div id="containers">
@@ -152,8 +155,8 @@
 
 <!--<script src="/public/js/utils/nsDraw2d.js"></script>-->
 
-<div id="property-table">
-    <table>
+<div id="table-container" >
+    <table id="property-table" border=1>
         <p>Property table</p>
     </table>
 </div>
@@ -167,5 +170,5 @@
     createMenu();
 </script>
 
-<script src="/public/js/utils/nsMain2dInterface.js"></script>
 <script src="/public/js/utils/nsMain3dInterface.js"></script>
+<script src="/public/js/utils/nsMain2dInterface.js"></script>

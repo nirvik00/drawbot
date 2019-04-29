@@ -18,22 +18,29 @@ var nsPt=function(x,y,z){
     this.mat;
     this.colr="rgb(255,0,0,100)";
     this.generateGeometry3d=function(){   
-        var x,y,z;
+        try{
+            this.mesh.geometry.dispose();
+            this.mesh.material.dispose();
+            scene.remove(this.mesh);
+        }catch(e){
+            console.log("gen point");
+        }
         if(this.x===0 && this.y===0 && this.z===0){
-            x=Math.random()*2;
-            y=Math.random()*2;
-            z=0;
+            this.x=Math.random()*2+3;
+            this.y=Math.random()*2+3;
+            this.z=0;
         }
         this.geo=new THREE.SphereBufferGeometry(this.r,10,10);
         this.mat=new THREE.MeshBasicMaterial({
-            color: 0xff01000
+            color: new THREE.Color("rgb(255,0,0)")
         });
-        this.mesh=new THREE.Mesh(this.geo,this.mat);
-        this.mesh.position.x=x;
-        this.mesh.position.y=y;
-        this.mesh.position.z=z;
-        scene.add(this.mesh);
-    }
+        var mesh=new THREE.Mesh(this.geo,this.mat);
+        mesh.position.x=this.x;
+        mesh.position.y=this.y;
+        mesh.position.z=this.z;
+        scene.add(mesh);
+        this.mesh=mesh;
+    }    
 }
 
 var nsLine=function(p,q){
@@ -65,6 +72,7 @@ var nsLine=function(p,q){
         this.mesh= new THREE.Line( geo, mat);
         scene.add(this.mesh);
     }
+    this.propertyList={"p":this.P, "q":this.Q};
 }
 
 var initNodeGeom=function(obj){
@@ -72,13 +80,15 @@ var initNodeGeom=function(obj){
         obj.cx=Math.random()*400+20;
         obj.cy=Math.random()*400+20;
     }
-    console.log("init- name: "+obj.name+" "+obj.cx+","+ obj.cy);
+    //console.log("init- name: "+obj.name+" "+obj.cx+","+ obj.cy);
     CANVASCONTEXT.globalAlpha=0.2;
     CANVASCONTEXT.fillStyle=obj.colr;
     CANVASCONTEXT.fillRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
     CANVASCONTEXT.globalAlpha=1.0;
     CANVASCONTEXT.fillStyle="rgb(0,0,0)";
     CANVASCONTEXT.strokeRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
+    CANVASCONTEXT.font = "10px Arial";
+    CANVASCONTEXT.fillText(obj.name, obj.cx, obj.cy);
 }
 var drawNodeGeom=function(obj){ //after dragging
     CANVASCONTEXT.globalAlpha=0.2;
@@ -87,6 +97,8 @@ var drawNodeGeom=function(obj){ //after dragging
     CANVASCONTEXT.globalAlpha=1.0;
     CANVASCONTEXT.fillStyle="rgb(0,0,0)";
     CANVASCONTEXT.strokeRect(obj.cx,obj.cy,obj.cLe,obj.cWi);
+    CANVASCONTEXT.font = "10px Arial";
+    CANVASCONTEXT.fillText(obj.name, obj.cx, obj.cy);
 }
 this.contains=function(obj,mx,my){
     if(mx>obj.cx && mx<obj.cx+obj.cLe && my>obj.cy && my<obj.cy+obj.cWi){

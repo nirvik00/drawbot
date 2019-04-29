@@ -3,7 +3,6 @@ window.onload=function(){
     //refer to other global variables
     CANVAS=document.getElementById("canvas-viewer");
     CANVASCONTEXT=CANVAS.getContext('2d');
-    property(CANVASCONTEXT);
 
     CANVAS.addEventListener('mousedown', mouseDownListener);
     CANVAS.addEventListener('mouseup', mouseUpListener);
@@ -38,8 +37,7 @@ function mouseMoveListener(e){
             var t=contains(obj,mx,my);
             if(t){
                 obj.selected=true;
-                console.log("selected: "+obj.name);
-                property(obj);
+                constructProperty(obj);
                 break;
             }
         }
@@ -63,6 +61,82 @@ function redrawCanvas(){
     CANVASCONTEXT.strokeRect(getMousePosition.x, getMousePosition.y, 10, 10);
 }
 
-var property= function(){
-    
+var constructProperty= function(obj){   
+    if(obj.name==="POINT"){
+        setPoint(obj);
+    }
+} 
+var setPoint=function(obj){
+        var tbl=document.getElementById("property-table");
+        while (tbl.hasChildNodes()){
+            tbl.removeChild(tbl.firstChild);
+        }
+        
+        var tr1=document.createElement("tr");
+        var td1=document.createElement("td");
+        var td2=document.createElement("td");
+        td1.innerHTML=obj.name;
+        td2.innerHTML="ENter Values";
+        tbl.appendChild(tr1);
+        tr1.appendChild(td1);
+        tr1.appendChild(td2);
+
+        var trx=document.createElement("tr");
+        var x0=document.createElement("td");
+        var X=document.createElement("input");
+        x0.innerHTML="X-coordinate";
+        X.value=obj.x;
+        tbl.appendChild(trx);
+        trx.appendChild(x0);
+        trx.appendChild(X);
+
+        var trY=document.createElement("tr");
+        var y0=document.createElement("td");
+        var Y=document.createElement("input");
+        y0.innerHTML="Y-coordinate";
+        Y.value=obj.y;
+        tbl.appendChild(trY);
+        trY.appendChild(y0);
+        trY.appendChild(Y);
+
+        var trZ=document.createElement("tr");
+        var z0=document.createElement("td");
+        var Z=document.createElement("input");
+        z0.innerHTML="Z-coordinate";
+        Z.value=obj.z;
+        tbl.appendChild(trZ);
+        trZ.appendChild(z0);
+        trZ.appendChild(Z);
+
+
+        var trEnd=document.createElement("tr");
+        var submit=document.createElement("button");
+        submit.innerHTML="SUBMIT";
+        tbl.appendChild(trEnd);
+        trEnd.appendChild(submit);
+
+        var rx=obj.x; 
+        var ry=obj.y;
+        var rz=obj.z;
+
+        submit.addEventListener('click', function(e){
+            xval=parseFloat(X.value);
+            yval=parseFloat(Y.value);
+            zval=parseFloat(Z.value);
+            if(!Number.isNaN(xval)){
+                rx=xval;
+            }
+            if(!Number.isNaN(yval)){
+                ry=yval;
+            }
+            if(!Number.isNaN(zval)){
+                rz=zval;
+            }     
+            obj.x=rx;
+            obj.y=ry;
+            obj.z=rz;
+            obj.generateGeometry3d();   
+             console.log(obj.x, obj.y, obj.z);
+        });  
+        
 }

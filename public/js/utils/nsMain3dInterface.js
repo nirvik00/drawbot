@@ -3,7 +3,7 @@ var init=function(){
     scene=new THREE.Scene();
     scene.background=new THREE.Color("rgb(255,255,255)");
 
-    camera=new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera=new THREE.PerspectiveCamera(45, 1.0, 0.1, 1000);
     camera.up=new THREE.Vector3(0,0,1);    
     camera.position.x=0;
     camera.position.y=20;
@@ -27,8 +27,6 @@ var init=function(){
     controls.addEventListener('change', render);
     controls.enableZoom=true;
     controls.enablePan=false;
-
-    //console.log(SceneElementsArr.length);
 }
 
 var mainLoop=function(){
@@ -41,7 +39,7 @@ var render=function(){
 }
 
 function onWindowResize() {
-    camera.aspect = 500/500;
+    camera.aspect = 0.75;
     camera.updateProjectionMatrix();
     renderer.setSize(500,500);
     //camera.aspect = window.innerWidth / window.innerHeight;
