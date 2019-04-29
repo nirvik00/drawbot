@@ -41,6 +41,7 @@ function mouseMoveListener(e){
             if(t){
                 obj.selected=true;
                 console.log("selected: "+obj.name);
+                property(obj);
                 break;
             }
         }
@@ -64,4 +65,6 @@ function redrawCanvas(){
     CANVASCONTEXT.strokeRect(getMousePosition.x, getMousePosition.y, 10, 10);
 }
 
-var property= function(ctx){}
+var property= function(){
+    
+}
