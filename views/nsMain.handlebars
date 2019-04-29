@@ -3,20 +3,16 @@
         border:1px solid grey;
     }
      #container{
-        position:relative;
-    }
-    #scene3d{
-        border: 1px solid black;
-    }
-    body{
-        margin:0;
+     z-index : 0;
+        position:absolute;
     }
     #menu{
-        width : 30%;
-        height : 10%;
-        position : relative;
+        z-index : 3;
+        position : absolute;
         left : 10px;
-        top : 25px;
+        top : 25px;        
+        width : 30%;
+        height : 10%;        
     }
     #floating {
         color : #ffffff;
@@ -30,9 +26,13 @@
         border : 1px solid #555555;
         padding : 10px;
         display : none;
-        overflow : auto;
-        z-index: 100;
+        overflow : auto;        
     }
+    body{
+        margin:0;
+    }
+ 
+ 
     span.link{
         color:black;
         cursor:pointer;
@@ -41,6 +41,16 @@
     a{
         color:skyblue;
     }
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
 </style>
 
 <div id="menu">
@@ -48,9 +58,6 @@
     <h4 id="hide-menu">HIDE MENU</h4>
 </div>
 
-<div id="hidden">
-    <textarea id="elements" hidden></textarea>
-</div>
 <div id="container" >
     <div id = "Scene3d"></div>
 </div>

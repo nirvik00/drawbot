@@ -4,14 +4,31 @@ var nsPt=function(x,y,z){
     this.x=x;
     this.y=y;
     this.z=z;
-    this.r=30.0;
+    this.p=new THREE.Vector3(this.x,this.y,this.z);
+    this.r=1.0;
+    this.mesh;
+    this.geo;
+    this.mat;
     this.generateGeometry=function(){        
-        var geo=new THREE.SphereBufferGeometry(this.r,10,10);
-        var mat=new THREE.MeshBasicMaterial({
+        this.geo=new THREE.SphereBufferGeometry(this.r,10,10);
+        this.mat=new THREE.MeshBasicMaterial({
             color: 0xffff00
         });
-        var mesh=new THREE.Mesh(geo,mat);
-        scene.add(mesh);
+        this.mesh=new THREE.Mesh(this.geo,this.mat);
+        this.mesh.position.x=this.x;
+        this.mesh.position.y=this.y;
+        this.mesh.position.z=this.z;
+        scene.add(this.mesh);
+    }
+    this.genSelectedGeometry=function(){     
+        this.geo=new THREE.SphereBufferGeometry(this.r*0.95,10,10);
+        this.mat = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+        this.mesh=new THREE.Mesh(this.geo,this.mat);
+        this.mesh.position.x=this.x;
+        this.mesh.position.y=this.y;
+        this.mesh.position.z=this.z;
+        scene.add(this.mesh);
+        console.log("generate selected mesh");
     }
 }
 
@@ -19,6 +36,7 @@ var nsLine=function(p,q){
     this.name="LINE";
     this.P=p;
     this.Q=q;
+    this.mesh;
     this.generateGeometry=function(){
         var geo = new THREE.Geometry();
         geo.vertices.push(new THREE.Vector3(p.x,p.y,p.z));
@@ -26,7 +44,11 @@ var nsLine=function(p,q){
         var mat=new THREE.LineBasicMaterial({ 
                color: new THREE.Color("rgb(0,0,255)") 
         });
-        var line = new THREE.Line( geo, mat);
-        scene.add(line);
+        this.mesh= new THREE.Line( geo, mat);
+        scene.add(this.mesh);
     }
+}
+
+var Di=function(a,b){
+    return Math.sqrt(Math.pow((a.x-b.x),2)+ Math.pow((a.y-b.y),2)+Math.pow((a.z-b.z),2));
 }
