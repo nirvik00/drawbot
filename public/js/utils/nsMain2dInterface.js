@@ -33,15 +33,22 @@ function mouseMoveListener(e){
     var mousePos=getMousePosition(e);
     var mx=mousePos.x;
     var my=mousePos.y;
-    if(dragging){
+    if(dragging){//if mouse down
         for(var i=0; i<SceneElementsArr.length; i++){
             var obj=SceneElementsArr[i];
             var t=contains(obj,mx,my);
-            if(t){
+            if(t){ // if mouse in obj in canvas
                 obj.selected=true;
-                constructProperty(obj);
+                constructProperty(obj);//generate prop table
                 break;
             }
+        }
+    }
+    for(var i=0; i<SceneElementsArr.length;i++){
+        var obj=SceneElementsArr[i];
+        var t=contains(obj,mx,my);
+        if(t){
+            constructProperty(obj);//generate prop table
         }
     }
 }
