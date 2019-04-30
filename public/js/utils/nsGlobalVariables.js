@@ -5,7 +5,7 @@ var FloatingDiv; // main menu
 
 var CANVAS, CANVASCONTEXT;
 var DRAGGING=false;
-var CONNECTING=false;
+var CONNECTING=false; var CONNECTINGLINE=[];
 var CANVASMSG="";
 
 

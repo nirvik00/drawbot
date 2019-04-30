@@ -16,14 +16,6 @@ function mouseDownListener(e){
     var mousePos=getMousePosition(e);
     var mx=mousePos.x;
     var my=mousePos.y;
-
-    if(DRAGGING===true){
-        CONNECTING=false;
-    }
-    if(CONNECTING===true){
-        DRAGGING=false;
-    }
-
     for(var i=0; i<SceneElementsArr.length; i++){
         var obj=SceneElementsArr[i];
         var t=contains(obj,mx,my);
@@ -31,6 +23,24 @@ function mouseDownListener(e){
             obj.selected=true;
             constructProperty(obj   );//generate prop table
             break;
+        }
+        
+    }
+
+    CONNECTINGLINE=[];
+    
+    if(DRAGGING===true){
+        CONNECTING=false;
+        CONNECTINGLINE=[];
+    }
+    if(CONNECTING===true){
+        DRAGGING=false;
+        for(var i=0; i<SceneElementsArr.length; i++){
+            if(obj.selected===true){
+                CONNECTINGLINE.push(obj);
+                alert(obj.name+","+obj.id);
+                break;                                                                                                                                  
+            }
         }
     }
     redrawCanvas();
@@ -44,8 +54,9 @@ function mouseUpListener(e){
                 obj.cx=getMousePosition(e).x;
                 obj.cy=getMousePosition(e).y;
                 obj.selected=false;
+            }else if(CONNECTING===true){
+                CONNECTINGLINE.push(obj);
             }
-
         } 
     }
     for(var i=0; i<SceneElementsArr.length; i++){
@@ -62,7 +73,7 @@ function mouseMoveListener(e){
         for(var i=0; i<SceneElementsArr.length; i++){
             var obj=SceneElementsArr[i];
             if(obj.selected===true && DRAGGING===true){
-                obj.cx=getMousePosition(e).x;
+                obj.cx=getMousePosition(e).x;                                                                       ``
                 obj.cy=getMousePosition(e).y;
             }
         }
@@ -75,6 +86,25 @@ function mouseMoveListener(e){
             constructProperty(obj);//generate prop table
         }
     }
+    try{
+        if(CONNECTINGLINE.length>0){
+            var obj=CONNECTINGLINE[0];
+            var rx=obj.cx+obj.cLe/2;
+            var ry=obj.cy+obj.cWi/2;
+            console.log(rx,ry);
+            var sx=getMousePosition(e).x;
+            var sy=getMousePosition(e).y;
+            CANVASCONTEXT.globalAlpha=1.0;
+            CANVASCONTEXT.fillStyle="rgb(0,0,0)";
+            CANVASCONTEXT.beginPath();
+            CANVASCONTEXT.moveTo(rx,ry);
+            CANVASCONTEXT.lineTo(sx,sy);
+            CANVASCONTEXT.stroke();
+        }
+    }catch(err){
+        //do nothing
+    }
+ 
     redrawCanvas();
 }
 
