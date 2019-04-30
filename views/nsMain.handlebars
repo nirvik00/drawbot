@@ -81,7 +81,9 @@
     </div>
 
     <div id="menu">
-        <p class="elements-menu" id="geom-menu">Geometry</p>
+        <p class="elements-menu" id="geom-menu">GEOMETRY</p>
+        <p class="elements-menu" id="drag-mode">DRAG-MODE</p>
+        <p class="elements-menu" id="connect-mode">CONNECT-MODE</p>
         <p class="elements-menu"  id="hide-menu">HIDE MENU</p>
     </div>
 
@@ -98,10 +100,13 @@
 <script src="/public/js/utils/nsGeomLib.js"></script>
 <script src="/public/js/utils/nsGenGeomMenu.js"></script>
 <script src="/public/js/utils/nsUpdateProp.js"></script>
+<script src="/public/js/utils/nsConnectElements.js"></script>
 <script src="/public/js/utils/nsMainMenuInterface.js"></script>
 
 <script>
-    createMenu();
+    createMenu();//file=nsMainMenuInterface, function=createMenu()
+
+    
 </script>
 
 <script src="/public/js/utils/nsMain3dInterface.js"></script>

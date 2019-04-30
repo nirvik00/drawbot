@@ -4,7 +4,9 @@ var FloatingDiv; // main menu
 
 
 var CANVAS, CANVASCONTEXT;
-var dragging=false;
+var DRAGGING=false;
+var CONNECTING=false;
+var CANVASMSG="";
 
 
 var scene3d=document.getElementById('three-viewer'); //3js 

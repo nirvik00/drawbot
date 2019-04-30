@@ -8,42 +8,66 @@ window.onload=function(){
 
     CANVAS.addEventListener('mousedown', mouseDownListener);
     CANVAS.addEventListener('mouseup', mouseUpListener);
-    CANVAS.addEventListener('mousemove', mouseMoveListener)
+    CANVAS.addEventListener('mousemove', mouseMoveListener);
+
 }
 
 function mouseDownListener(e){
-    dragging=true;
-}
+    var mousePos=getMousePosition(e);
+    var mx=mousePos.x;
+    var my=mousePos.y;
 
-function mouseUpListener(e){
-    dragging=false;
+    if(DRAGGING===true){
+        CONNECTING=false;
+    }
+    if(CONNECTING===true){
+        DRAGGING=false;
+    }
+
     for(var i=0; i<SceneElementsArr.length; i++){
         var obj=SceneElementsArr[i];
-        if(obj.selected===true){
-            obj.cx=getMousePosition(e).x;
-            obj.cy=getMousePosition(e).y;
-            obj.selected=false;
-            redrawCanvas();
+        var t=contains(obj,mx,my);
+        if(t){ // if mouse in obj in canvas
+            obj.selected=true;
+            constructProperty(obj   );//generate prop table
             break;
         }
     }
+    redrawCanvas();
+}
+
+function mouseUpListener(e){
+    for(var i=0; i<SceneElementsArr.length; i++){
+        var obj=SceneElementsArr[i];
+        if(obj.selected===true){
+            if(DRAGGING===true){
+                obj.cx=getMousePosition(e).x;
+                obj.cy=getMousePosition(e).y;
+                obj.selected=false;
+            }
+
+        } 
+    }
+    for(var i=0; i<SceneElementsArr.length; i++){
+        SceneElementsArr[i].selected=false;
+    }
+    redrawCanvas();
 }
 
 function mouseMoveListener(e){
     var mousePos=getMousePosition(e);
     var mx=mousePos.x;
     var my=mousePos.y;
-    if(dragging){//if mouse down
+    if(DRAGGING===true){//if mouse down && event.button=0
         for(var i=0; i<SceneElementsArr.length; i++){
             var obj=SceneElementsArr[i];
-            var t=contains(obj,mx,my);
-            if(t){ // if mouse in obj in canvas
-                obj.selected=true;
-                constructProperty(obj);//generate prop table
-                break;
+            if(obj.selected===true && DRAGGING===true){
+                obj.cx=getMousePosition(e).x;
+                obj.cy=getMousePosition(e).y;
             }
         }
     }
+    //if mouse on object reveal properties
     for(var i=0; i<SceneElementsArr.length;i++){
         var obj=SceneElementsArr[i];
         var t=contains(obj,mx,my);
@@ -51,6 +75,7 @@ function mouseMoveListener(e){
             constructProperty(obj);//generate prop table
         }
     }
+    redrawCanvas();
 }
 
 function getMousePosition(e){
@@ -70,6 +95,7 @@ function redrawCanvas(){
         drawNodeGeom(obj);    
     }
     CANVASCONTEXT.strokeRect(getMousePosition.x, getMousePosition.y, 10, 10);
+    canvasUpdateMsg();
 }
 
 var constructProperty= function(obj){   
@@ -80,3 +106,9 @@ var constructProperty= function(obj){
     }
 } 
 
+var canvasUpdateMsg=function(){
+    CANVASCONTEXT.globalAlpha=1.0;
+    CANVASCONTEXT.fillStyle="rgb(0,0,0)";
+    CANVASCONTEXT.font = "10px Arial";
+    CANVASCONTEXT.fillText(CANVASMSG, 10,10);
+}

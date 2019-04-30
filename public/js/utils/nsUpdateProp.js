@@ -11,7 +11,6 @@ var setLine=function(obj){
     tbl.appendChild(tr1);
     tr1.appendChild(td1);
     tr1.appendChild(td2);
-
     var trP=document.createElement('tr');
     var P0=document.createElement('td');
     P0.innerHTML="start Point (name) : ";
@@ -62,11 +61,25 @@ var setLine=function(obj){
 
 }
 
+var getAllPoints=function(){
+    var pts=[];
+    for(var i=0; i<SceneElementsArr.length; i++){
+        var obj=SceneElementsArr[i];
+        if(obj.name.toUpperCase()==="POINT"){
+            pts.push(obj);
+        }
+    }
+    return pts;
+}
+
 var setPoint=function(obj){
     var tbl=document.getElementById("property-table");
     while (tbl.hasChildNodes()){
         tbl.removeChild(tbl.firstChild);
     }        
+
+
+
     var tr1=document.createElement("tr");
     var td1=document.createElement("td");
     var td2=document.createElement("td");

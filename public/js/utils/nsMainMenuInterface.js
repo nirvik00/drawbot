@@ -1,3 +1,4 @@
+
 var createMenu=function(){
     ELEMENTS=document.getElementById("elements");
     var FloatingDiv;
@@ -49,8 +50,25 @@ var createMenu=function(){
     endButton.addEventListener('click', function(){
         FloatingDiv.style.display='none';
     });
+    document.getElementById("connect-mode").addEventListener('click', function(){
+        CONNECTING=true;
+        DRAGGING=false;
+        CANVASMSG="connecting-mode";
+        canvasUpdateMsg();
+        redrawCanvas();
+    });
+    document.getElementById("drag-mode").addEventListener('click', function(){
+        DRAGGING=true;
+        CONNECTING=false;
+        CANVASMSG="dragging-mode";
+        canvasUpdateMsg();
+        redrawCanvas();
+    });
+
 }
 
 var displaySceneElements=function(){
     //console.log(SceneElementsArr);
 }
+
+
