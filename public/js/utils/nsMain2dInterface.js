@@ -28,7 +28,7 @@ function mouseDownListener(e){
     }
 
     CONNECTINGLINE=[];
-    
+
     if(DRAGGING===true){
         CONNECTING=false;
         CONNECTINGLINE=[];
@@ -36,9 +36,10 @@ function mouseDownListener(e){
     if(CONNECTING===true){
         DRAGGING=false;
         for(var i=0; i<SceneElementsArr.length; i++){
+            var obj=SceneElementsArr[i];
             if(obj.selected===true){
-                CONNECTINGLINE.push(obj);
-                alert(obj.name+","+obj.id);
+                CONNECTINGLINE[0]=obj;
+                console.log("ini: "+obj.cx+","+obj.cy)
                 break;                                                                                                                                  
             }
         }
@@ -54,11 +55,32 @@ function mouseUpListener(e){
                 obj.cx=getMousePosition(e).x;
                 obj.cy=getMousePosition(e).y;
                 obj.selected=false;
-            }else if(CONNECTING===true){
-                CONNECTINGLINE.push(obj);
             }
         } 
     }
+    if(CONNECTING===true && CONNECTINGLINE.length>0){
+        var cx=CONNECTINGLINE[0].cx;
+        var cy=CONNECTINGLINE[0].cy;
+        var cR=CONNECTINGLINE[0].cR;
+        var a=getMousePosition(e).x;
+        var b=getMousePosition(e).y;
+        if(dis2(cx,cy,a,b)<cR){
+            console.log("inside same obj");
+        }else{
+            console.log("trying to find 2");
+            for(var i=0; i<SceneElementsArr.length; i++){
+                var x=SceneElementsArr[i].cx;
+                var y=SceneElementsArr[i].cy;
+                var r=SceneElementsArr[i].cR;
+                if(dis2(cx,cy,x,y)>cR && dis2(a,b,x,y)<r){
+                    CONNECTINGLINE[1]=SceneElementsArr[i];
+                    console.log("final: "+x+","+y)
+                    break;
+                }
+            }
+        }
+    }
+    //deselect all objects
     for(var i=0; i<SceneElementsArr.length; i++){
         SceneElementsArr[i].selected=false;
     }
@@ -86,25 +108,6 @@ function mouseMoveListener(e){
             constructProperty(obj);//generate prop table
         }
     }
-    try{
-        if(CONNECTINGLINE.length>0){
-            var obj=CONNECTINGLINE[0];
-            var rx=obj.cx+obj.cLe/2;
-            var ry=obj.cy+obj.cWi/2;
-            console.log(rx,ry);
-            var sx=getMousePosition(e).x;
-            var sy=getMousePosition(e).y;
-            CANVASCONTEXT.globalAlpha=1.0;
-            CANVASCONTEXT.fillStyle="rgb(0,0,0)";
-            CANVASCONTEXT.beginPath();
-            CANVASCONTEXT.moveTo(rx,ry);
-            CANVASCONTEXT.lineTo(sx,sy);
-            CANVASCONTEXT.stroke();
-        }
-    }catch(err){
-        //do nothing
-    }
- 
     redrawCanvas();
 }
 
@@ -125,6 +128,22 @@ function redrawCanvas(){
         drawNodeGeom(obj);    
     }
     CANVASCONTEXT.strokeRect(getMousePosition.x, getMousePosition.y, 10, 10);
+    
+    try{
+        var cx=CONNECTINGLINE[0].cx;
+        var cy=CONNECTINGLINE[0].cy;
+        var ca=CONNECTINGLINE[1].cx;
+        var cb=CONNECTINGLINE[1].cy; 
+        CANVASCONTEXT.globalAlpha=1.0;
+        CANVASCONTEXT.fillStyle="rgb(0,0,0)";
+        CANVASCONTEXT.beginPath();
+        CANVASCONTEXT.moveTo(cx,cy);
+        CANVASCONTEXT.lineTo(ca,cb);
+        CANVASCONTEXT.stroke();
+    }catch(err){
+
+    }
+    
     canvasUpdateMsg();
 }
 

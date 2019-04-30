@@ -139,7 +139,7 @@ this.contains=function(obj,mx,my){
 }
 
 var dis2=function(x,y,a,b){
-    return Math.sqrt( Math.pow((x-a),2) + Math.pow((y-b),2) );
+    return Math.sqrt( (x-a)*(x-a) + (y-b)*(y-b) );
 }
 
 var Di=function(a,b){
