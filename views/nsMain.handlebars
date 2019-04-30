@@ -1,83 +1,11 @@
-<!--
-<style>
-    #canvas-viewer{
-        border:1px solid grey;
-        width:500px;
-        height:500px;
-        float:left;
-    }
-    #menu{
-        z-index : 3;
-        position : absolute;
-        left : 10px;
-        top : 25px;        
-        width : 12%;
-        height : 10%;        
-    }
-    p.elements-menu{
-        color: black;
-        background-color:yellow;
-        font-family: courier;
-        font-size: 160%;
-    }
-    p.elements-menu:hover{
-        background-color:red;
-    }
-    #containers{
-        overflow:hidden;
-    }
 
-    #threeviewer-container{
-        margin-left:550px;
-    }    
-    #three-viewer{
-        //border:1px solid red;
-    }
-    #floating {
-        color : #ffffff;
-        background : #000000;
-        opacity : 0.5;
-        width : 50%;
-        height : 40%;
-        position : absolute;
-        left : 20%;
-        top : 10%;
-        border : 1px solid #555555;
-        padding : 10px;
-        display : none;
-        overflow : auto;        
-    }
+<style>
     body{
-        margin:0;
-    } 
-    span.link{
-        color:black;
-        cursor:pointer;
-        text-decoration:underline;
-    }    
-    .button {
-        background-color: #4CAF50; /* Green */
-        border: 1px solid black;
-        color: white;
-        padding: 15px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
+        background: #000000;
     }
-    .button:hover{
-        background-color:red;
+    #all-containers{
+        overflow: scroll;
     }
-    #property-table{
-        position:absolute;
-        top:70%;
-        left:10%;
-    }
-
-</style>
--->
-
-<style>
     #canvas-viewer{
         border:1px solid grey;
         position:relative;
@@ -137,33 +65,39 @@
         background-color:red;
     }
     #property-table{
-        border:1px solid grey;
+        border:1px solid black;
+        border-width:3px; 
+        padding: 10px;
+        background-color:rgb(255,255,255);
     }
 </style>
 
-<div id="containers">
-    <canvas id = "canvas-viewer" height="500" width="500"></canvas>
-    <div id="threeviewer-container">
-        <div id = "three-viewer"></div>
+<div id="all-container">
+    <div id="containers">
+        <canvas id = "canvas-viewer" height="500" width="500"></canvas>
+        <div id="threeviewer-container">
+            <div id = "three-viewer"></div>
+        </div>
     </div>
-</div>
 
-<div id="menu">
-    <p class="elements-menu" id="geom-menu">Geometry</p>
-    <p class="elements-menu"  id="hide-menu">HIDE MENU</p>
-</div>
+    <div id="menu">
+        <p class="elements-menu" id="geom-menu">Geometry</p>
+        <p class="elements-menu"  id="hide-menu">HIDE MENU</p>
+    </div>
 
-<!--<script src="/public/js/utils/nsDraw2d.js"></script>-->
+    <!--<script src="/public/js/utils/nsDraw2d.js"></script>-->
 
-<div id="table-container" >
-    <table id="property-table" border=1>
-        <p>Property table</p>
-    </table>
+    <div id="table-container">
+        <table id="property-table" border=1>
+            <p>Property table</p>
+        </table>
+    </div>
 </div>
 
 <script src="/public/js/utils/nsGlobalVariables.js"></script>
 <script src="/public/js/utils/nsGeomLib.js"></script>
 <script src="/public/js/utils/nsGenGeomMenu.js"></script>
+<script src="/public/js/utils/nsUpdateProp.js"></script>
 <script src="/public/js/utils/nsMainMenuInterface.js"></script>
 
 <script>

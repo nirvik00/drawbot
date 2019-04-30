@@ -24,8 +24,8 @@ var createMenu=function(){
     Line.className="button";
     FloatingDiv.appendChild(Line);
     Line.addEventListener('click', function(){
-        var p=new nsPt(0,0,0);
-        var q=new nsPt(0,0,0);
+        var p=new nsPt(0,0,0); p.id=-1;
+        var q=new nsPt(0,0,0); q.id=-1;
         var l=new nsLine(p,q);
         l.generateGeometry3d();
         l.id=ElementCounter;
