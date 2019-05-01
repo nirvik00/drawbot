@@ -19,8 +19,10 @@ function nsEdgeGridAlg(name, p, q, l){
     this.depth=3; //depth of interp grid
     this.dir=1; //direction of normal
 
-    this.interPpts=[];
+    this.interpts=[];
+    this.interptsNormal=[];
     this.interpMesh=[];
+    this.interpedges=[];
 
     this.updatePts=function(p,q){
         this.p=p;
@@ -31,31 +33,7 @@ function nsEdgeGridAlg(name, p, q, l){
         this.Edge=e;
     }
 
-    this.generateGeometry3d=function(){
-        try{
-            for(var i=0; i<this.interPpts.length; i++){
-                this.interPpts[i].mesh.geometry.dispose();
-                this.interPpts[i].mesh.material.dispose();
-                scene.remove(this.interPpts[i].mesh);
-            }
-            console.log("meshed.deleted");
-        }catch(e){
-            console.log("gen point");
-        }
-        this.interPpts=[];
-
-        if(this.interpMesh===undefined && this.interpMesh.length==0){
-            for(var i=0; i<this.interpMesh.length; i++){
-                this.interpMesh[i].mesh.geometry.dispose();
-                this.interpMesh[i].mesh.material.dispose();
-                scene.remove(this.interpMesh[i].mesh);
-            }
-            console.log("meshed.deleted");
-        }
-
-        this.interpMesh=[];
-
-
+    this.generateinterpts=function(){
         var ux=parseFloat(this.q.x)- parseFloat(this.p.x);
         var uy=parseFloat(this.q.y)- parseFloat(this.p.y);
         var uz=parseFloat(this.q.z)- parseFloat(this.p.z);
@@ -71,7 +49,99 @@ function nsEdgeGridAlg(name, p, q, l){
             p.colr=this.colr3d;
             mesh=p.generateGeometry3d();
             this.interpMesh.push(mesh);
-            this.interPpts.push(p);
+            this.interpts.push(p);
         }
+    }
+
+    this.generateNormalSeg=function(){
+        var px=parseFloat(this.p.x);
+        var py=parseFloat(this.p.y);
+        var pz=parseFloat(this.p.z);
+
+        var qx=parseFloat(this.q.x);
+        var qy=parseFloat(this.q.y);
+        var qz=parseFloat(this.q.z);
+
+        var ux=qx-px;
+        var uy=qy-py;
+        var uz=qz-pz;
+
+        var norm=Math.sqrt(ux*ux + uy*uy +uz*uz);
+
+        var u=[ux/norm, uy/norm, uz/norm];
+        var v=[u[1], -u[0], u[2]];
+        if(this.dir===1){
+            v=[-u[1], u[0], u[2]];
+        }
+        for(var i=0; i<this.interpts.length; i++){
+            var p=this.interpts[i];
+            var x=parseFloat(p.x);
+            var y=parseFloat(p.y);
+            var z=parseFloat(p.z);
+            var qx=x+v[0]*this.depth;
+            var qy=y+v[1]*this.depth;
+            var qz=z+v[2]*this.depth;
+            var pt=new nsPt(qx,qy,qz);
+            pt.r=this.rad3d;
+            pt.colr=this.colr3d;
+            mesh=pt.generateGeometry3d();
+            this.interpMesh.push(mesh);
+            this.interptsNormal.push(pt);
+        }
+
+        for(var i=0; i<this.interpts.length; i++){
+            var p=this.interpts[i];
+            var q=this.interptsNormal[i];
+            var u=new nsLine(p,q);
+            u.colr="rgb(250,150,0)";
+            var mesh0=u.generateGeometry3d(); // file : nsGeomLib.js = 3DVIEWER
+            this.interpMesh.push(mesh0);
+            if(i<this.interpts.length-1){
+                var a=this.interpts[i];
+                var b=this.interpts[i+1];
+                var c=this.interptsNormal[i];
+                var d=this.interptsNormal[i+1];
+                var v=new nsLine(a,b);
+                v.colr="rgb(250,150,0)";
+                var w=new nsLine(c,d);
+                w.colr="rgb(250,150,0)";
+                this.interpedges.push(u);
+                this.interpedges.push(v);
+                var mesh1=v.generateGeometry3d(); // file : nsGeomLib.js = 3DVIEWER
+                var mesh2=w.generateGeometry3d(); // file : nsGeomLib.js = 3DVIEWER
+                this.interpMesh.push(mesh1);
+                this.interpMesh.push(mesh2);
+            }
+        }
+    }
+
+    this.generateGeometry3d=function(){
+        if(this.interpMesh===undefined && this.interpMesh.length==0){
+        }else{
+            for(var i=0; i<this.interpMesh.length; i++){
+                this.interpMesh[i].geometry.dispose();
+                this.interpMesh[i].material.dispose();
+                scene.remove(this.interpMesh[i]);
+            }
+            console.log("meshed.deleted");
+        }
+
+        if(this.interpts===undefined && this.interpts.length==0){
+        }else{
+            for(var i=0; i<this.interpts.length; i++){
+                this.interpts[i].mesh.geometry.dispose();
+                this.interpts[i].mesh.material.dispose();
+                scene.remove(this.interpts[i].mesh);
+            }
+        }
+
+        this.interpMesh=[]; //make sure to clear array after deleting the mesh
+        this.interpts=[]; //clear array after deleting mesh
+        this.interptsNormal=[];
+        this.interpedges=[]; //clear the interpolated edges mesh
+
+        this.generateinterpts(); //generate the interpolated points
+        this.generateNormalSeg(); //generate normal points
+        
     }
 }

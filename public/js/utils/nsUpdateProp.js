@@ -61,6 +61,7 @@ var genHTMLPropsForSetPoint=function(obj){
         xval=parseFloat(X.value);
         yval=parseFloat(Y.value);
         zval=parseFloat(Z.value);
+
         if(!Number.isNaN(xval)){
             rx=xval;
         }
@@ -167,7 +168,6 @@ var genHTMLPropsForSetLine=function(obj){
     });
 
 }
-
 
 //algorithm
 var genHTMLPropsForEdgeGrid=function(obj){

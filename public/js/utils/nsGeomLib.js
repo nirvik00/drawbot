@@ -30,7 +30,7 @@ var nsPt=function(x,y,z){
             this.mesh.material.dispose();
             scene.remove(this.mesh);
         }catch(e){
-            console.log("gen point");
+            //ready to generate points
         }
         if(this.x===0 && this.y===0 && this.z===0){
             this.x=nsRandRange(-5,5).toFixed(2);//file : nsRandom functions
@@ -81,15 +81,20 @@ var nsLine=function(p,q){
             this.q.x=Math.random()*5;
             this.q.y=Math.random()*5;
             this.q.z=Math.random()*5;
+        }else{
+            this.p.x=parseFloat(this.p.x);
+            this.p.y=parseFloat(this.p.y);
+            this.p.z=parseFloat(this.p.z);
         }
         var geo = new THREE.Geometry();
         geo.vertices.push(new THREE.Vector3(this.p.x,this.p.y,this.p.z));
         geo.vertices.push(new THREE.Vector3(this.q.x,this.q.y,this.q.z));
         var mat=new THREE.LineBasicMaterial({ 
-               color: new THREE.Color("rgb(0,0,255)") 
+               color: new THREE.Color(this.colr) 
         });
         this.mesh= new THREE.Line( geo, mat);
         scene.add(this.mesh);
+        return this.mesh;
     }
 }
 
