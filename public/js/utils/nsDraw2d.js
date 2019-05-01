@@ -1,4 +1,8 @@
 
+
+//not yet implemented
+
+
 var size=prompt('enter bush size: ');
 var md=false;
 var canvas =document.getElementById("canvas-viewer");

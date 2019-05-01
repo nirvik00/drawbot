@@ -100,6 +100,7 @@ var initNodeGeom=function(obj){
     }
     drawNodeGeom(obj);
 }
+
 var drawNodeGeom=function(obj){ //after dragging
     //outer circle
     CANVASCONTEXT.globalAlpha=0.2;

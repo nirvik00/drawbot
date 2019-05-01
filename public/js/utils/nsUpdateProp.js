@@ -1,6 +1,7 @@
 
 
 // user interaction to detect the connection between elements 
+// dynamically generates html table with event listener
 
 var setLine=function(obj){
     var tbl=document.getElementById("property-table");
@@ -80,11 +81,13 @@ var setLine=function(obj){
                 //do nothing because nothing happened!
             }
         }
-        obj.generateGeometry3d();
-        updateElementChanges();
+        obj.generateGeometry3d(); // file : nsGeomLib.js
+        updateElementChanges(); // this file
     });
 
 }
+
+
 var gethtmlSelectOptFromArrId=function(arr,id){
     // create options to show point objects in the select list
     var selDiv=document.createElement("td");
@@ -99,7 +102,6 @@ var gethtmlSelectOptFromArrId=function(arr,id){
     }
     return selDiv;
 }
-
 
 var getAllPoints=function(){
     var pts=[];

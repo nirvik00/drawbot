@@ -1,3 +1,10 @@
+<!--
+main point of entry to app: utils 
+html skeleton with style
+
+the geometry menu is generated at nsMainMenuInterface.js
+-->
+
 
 <style>
     body{
@@ -40,13 +47,15 @@
         left : 550px;
         top : 25px;        
         width : 150px;
-        height : 10%;        
+        height : 10%;       
+
     }
     p.elements-menu{
         color: black;
-        background-color:yellow;
+        background-color:rgb(33, 2, 221);
+        color:white;
         font-family: courier;
-        font-size: 160%;
+        font-size: 120%; 
     }
     p.elements-menu:hover{
         background-color:red;
@@ -81,10 +90,11 @@
     </div>
 
     <div id="menu">
-        <p class="elements-menu" id="geom-menu">GEOMETRY</p>
-        <p class="elements-menu" id="drag-mode">DRAG-MODE</p>
-        <p class="elements-menu" id="connect-mode">CONNECT-MODE</p>
-        <p class="elements-menu"  id="hide-menu">HIDE MENU</p>
+        <p class="elements-menu" id="geom-menu">&nbsp; GEOMETRY</p>
+        <p class="elements-menu" id="alg-menu">&nbsp; ALGORITHMS</p>
+        <p class="elements-menu" id="drag-mode">&nbsp;mode-DRAG</p>
+        <p class="elements-menu" id="connect-mode">&nbsp;mode-CONNECT</p>
+        <p class="elements-menu"  id="hide-menu">&nbsp;HIDE MENU</p>
     </div>
 
     <!--<script src="/public/js/utils/nsDraw2d.js"></script>-->
@@ -100,14 +110,13 @@
 <script src="/public/js/utils/nsRandomFunctions.js"></script>
 <script src="/public/js/utils/nsGlobalVariables.js"></script>
 <script src="/public/js/utils/nsGeomLib.js"></script>
-<script src="/public/js/utils/nsGenGeomMenu.js"></script>
 <script src="/public/js/utils/nsUpdateProp.js"></script>
 <script src="/public/js/utils/nsConnectElements.js"></script>
-<script src="/public/js/utils/nsMainMenuInterface.js"></script>
+<script src="/public/js/utils/nsMainMenuInterface.js"></script> 
 
 <script>
-    createMenu();//file=nsMainMenuInterface, function=createMenu()
-
+    createGeomMenu();//file=nsMainMenuInterface, function=createMenu()
+    createAlgMenu(); // file : nsMainMenuInterface
     
 </script>
 

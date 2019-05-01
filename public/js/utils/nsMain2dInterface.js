@@ -1,3 +1,8 @@
+//handles main events on the canvas
+// redraw function 
+
+//sends to update property file
+
 window.onload=function(){
     //all elements in memory= SceneElementsArr
     //refer to other global variables
@@ -106,7 +111,7 @@ function mouseMoveListener(e){
         var t=contains(obj,mx,my);
         if(t){
             redrawCanvas();
-            constructProperty(obj);//generate prop table
+            constructProperty(obj);// file: same file = generate prop table
         }
     }
     redrawCanvas();
@@ -126,7 +131,7 @@ function redrawCanvas(){
     CANVASCONTEXT.fillRect(0,0,CANVAS.width, CANVAS.height);
     for(var i=0; i<SceneElementsArr.length; i++){
         var obj=SceneElementsArr[i];
-        drawNodeGeom(obj);    
+        drawNodeGeom(obj); // file : nsGeomLib.js
     }
     CANVASCONTEXT.strokeRect(getMousePosition.x, getMousePosition.y, 10, 10);
     
@@ -145,14 +150,14 @@ function redrawCanvas(){
 
     }
     canvasUpdateConnections();// in file nsConnectElements
-    canvasUpdateMsg();
+    canvasUpdateMsg(); // this file
 }
 
 var constructProperty= function(obj){   
     if(obj.name==="POINT"){
-        setPoint(obj);
+        setPoint(obj); // file : nsUpdateProp.js
     }else if(obj.name==="LINE"){
-        setLine(obj);
+        setLine(obj); // file : nsUpdateProp.js
     }
 } 
 
