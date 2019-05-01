@@ -115,6 +115,21 @@ function nsEdgeGridAlg(name, p, q, l){
         }
     }
 
+    this.inputError=function(){
+        var px=parseFloat(this.p.x);
+        var py=parseFloat(this.p.y);
+        var pz=parseFloat(this.p.z);
+
+        var qx=parseFloat(this.q.x);
+        var qy=parseFloat(this.q.y);
+        var qz=parseFloat(this.q.z);
+        if(px===qx && py===qy && pz===qz){
+            return true; // threre is error
+        }else{
+            return false; //no error
+        }
+    }
+
     this.generateGeometry3d=function(){
         if(this.interpMesh===undefined && this.interpMesh.length==0){
         }else{
@@ -140,8 +155,10 @@ function nsEdgeGridAlg(name, p, q, l){
         this.interptsNormal=[];
         this.interpedges=[]; //clear the interpolated edges mesh
 
-        this.generateinterpts(); //generate the interpolated points
-        this.generateNormalSeg(); //generate normal points
-        
+        var t=this.inputError();
+        if(t===false){
+            this.generateinterpts(); //generate the interpolated points
+            this.generateNormalSeg(); //generate normal points
+        }
     }
 }
