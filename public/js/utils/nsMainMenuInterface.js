@@ -104,6 +104,21 @@ var createAlgMenu=function(){
         ElementCounter++; // file: nsGlobalVariable.js
     });
 
+    var BezierCrv=document.createElement("BUTTON");
+    BezierCrv.innerHTML="BEZIER-CURVE";    
+    BezierCrv.className="button";
+    FloatingDiv.appendChild(BezierCrv);
+    BezierCrv.addEventListener('click', function(){
+        var p=new nsPt(0,0,0); p.id=-1; // file : nsGeomLib.js
+        var q=new nsPt(0,0,0); q.id=-1; // file : nsGeomLib.js
+        var r=new nsPt(0,0,0); q.id=-1; // file : nsGeomLib.js
+        var a=new BezierCurve3pt("BEZIERCURVE3PT", p, q, r); // file : nsAlgLib.js
+        a.id=ElementCounter; // file: nsGlobalVariable.js
+        initNodeGeom(a); // file : nsGeomLib.js = CANVAS
+        SceneElementsArr.push(a); // file: nsGlobalVariable.js
+        ElementCounter++; // file: nsGlobalVariable.js
+    });
+
 
     var endButton=document.createElement("BUTTON");
     endButton.className="button";
