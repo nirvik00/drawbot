@@ -229,7 +229,6 @@ var genHTMLPropsForEdgeGrid=function(obj){
     // dynamically generate select-options of all points
     trQ.appendChild(gethtmlSelectOptFromArrId(ptObjArr,"endPt")); 
 
-
     var trNum=document.createElement("tr");
     var tdNum0=document.createElement("td")
     var tdNum=document.createElement("input");
@@ -279,7 +278,6 @@ var genHTMLPropsForEdgeGrid=function(obj){
         if(num>0){
             obj.num=num;
         }
-        
         obj.generateGeometry3d(); // file : same
         updateElementChanges(); // file: nsUpdateProp.js
     });
