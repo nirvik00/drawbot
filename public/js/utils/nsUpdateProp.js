@@ -3,6 +3,8 @@ var setLine=function(obj){
     while (tbl.hasChildNodes()){
         tbl.removeChild(tbl.firstChild);
     }        
+    var ptObjArr=getAllPoints();
+
     var tr1=document.createElement("tr");
     var td1=document.createElement("td");
     var td2=document.createElement("td");
@@ -23,6 +25,7 @@ var setLine=function(obj){
     tbl.appendChild(trP);
     trP.appendChild(P0);
     trP.appendChild(P);
+    trP.appendChild(gethtmlSelectOptFromArrId(ptObjArr,"startPt"));
     
     var trQ=document.createElement('tr');
     var Q0=document.createElement('td');
@@ -36,6 +39,7 @@ var setLine=function(obj){
     tbl.appendChild(trQ);
     trQ.appendChild(Q0);
     trQ.appendChild(Q);
+    trQ.appendChild(gethtmlSelectOptFromArrId(ptObjArr,"endPt"));
 
     var trEnd=document.createElement("tr");
     var submit=document.createElement("button");
@@ -44,13 +48,24 @@ var setLine=function(obj){
     trEnd.appendChild(submit);
 
     submit.addEventListener('click', function(e){
+        var g=document.getElementById("startPt");
+        var startPt=g.options[g.selectedIndex].text;
+        var e = document.getElementById("endPt");
+        var endPt = e.options[e.selectedIndex].text;
         for(var i=0; i<SceneElementsArr.length; i++){
             var obj2=SceneElementsArr[i];
             var t=obj2.name+""+obj2.id;
             if(P.value.toUpperCase()===t){
                 obj.p=obj2;
                 P.value=obj2.name+""+obj2.id;
-            }else if(Q.value.toUpperCase()===t){
+            }else if(startPt===t){
+                obj.p=obj2;
+                P.value=obj2.name+""+obj2.id;
+            }
+            else if(Q.value.toUpperCase()===t){
+                obj.q=obj2;
+                Q.value=obj2.name+""+obj2.id;
+            }else if(endPt===t){
                 obj.q=obj2;
                 Q.value=obj2.name+""+obj2.id;
             }
@@ -60,6 +75,21 @@ var setLine=function(obj){
     });
 
 }
+var gethtmlSelectOptFromArrId=function(arr,id){
+    // create options to show point objects in the select list
+    var selDiv=document.createElement("td");
+    var selList = document.createElement("select");
+    selList.id = id;
+    selDiv.appendChild(selList);
+    for (var i = 0; i < arr.length; i++) {
+        var option = document.createElement("option");
+        option.value = arr[i].name+""+arr[i].id;
+        option.text = arr[i].name+""+arr[i].id;
+        selList.appendChild(option);
+    }
+    return selDiv;
+}
+
 
 var getAllPoints=function(){
     var pts=[];
@@ -77,9 +107,6 @@ var setPoint=function(obj){
     while (tbl.hasChildNodes()){
         tbl.removeChild(tbl.firstChild);
     }        
-
-
-
     var tr1=document.createElement("tr");
     var td1=document.createElement("td");
     var td2=document.createElement("td");
@@ -92,6 +119,7 @@ var setPoint=function(obj){
     var trx=document.createElement("tr");
     var x0=document.createElement("td");
     var X=document.createElement("input");
+    X.setAttribute("type", "number");
     x0.innerHTML="X-coordinate";
     X.value=obj.x;
     tbl.appendChild(trx);
@@ -101,6 +129,7 @@ var setPoint=function(obj){
     var trY=document.createElement("tr");
     var y0=document.createElement("td");
     var Y=document.createElement("input");
+    Y.setAttribute("type", "number");
     y0.innerHTML="Y-coordinate";
     Y.value=obj.y;
     tbl.appendChild(trY);
@@ -110,6 +139,7 @@ var setPoint=function(obj){
     var trZ=document.createElement("tr");
     var z0=document.createElement("td");
     var Z=document.createElement("input");
+    Z.setAttribute("type", "number");
     z0.innerHTML="Z-coordinate";
     Z.value=obj.z;
     tbl.appendChild(trZ);
