@@ -8,7 +8,7 @@ var createGeomMenu=function(){
     ELEMENTS=document.getElementById("elements");
     var FloatingDiv;
     FloatingDiv=document.createElement('div');
-    FloatingDiv.id='floating';
+    FloatingDiv.id='floating-geom';
     document.body.appendChild(FloatingDiv);
     
     var Point=document.createElement("BUTTON");
@@ -39,12 +39,22 @@ var createGeomMenu=function(){
         ElementCounter++; // file: nsGlobalVariable.js
     });
 
+
+    var Polygon=document.createElement("BUTTON");
+    Polygon.innerHTML="POLYGON";
+    Polygon.className="button";
+    FloatingDiv.appendChild(Polygon);
+    Polygon.addEventListener('click', function(){
+
+    });
+
     var endButton=document.createElement("BUTTON");
     endButton.className="button";
     endButton.innerHTML="CLOSE";
     FloatingDiv.appendChild(endButton);
 
     document.getElementById("geom-menu").addEventListener('click', function(){
+        document.getElementById("floating-alg").style.display='none';
         FloatingDiv.style.display='block';
     }); 
     document.getElementById("hide-menu").addEventListener('click', function(){
@@ -76,14 +86,14 @@ var createAlgMenu=function(){
     ELEMENTS=document.getElementById("elements");
     var FloatingDiv;
     FloatingDiv=document.createElement('div');
-    FloatingDiv.id='floating';
+    FloatingDiv.id='floating-alg';
     document.body.appendChild(FloatingDiv);
     
-    var Point=document.createElement("BUTTON");
-    Point.innerHTML="EDGE-GRID";    
-    Point.className="button";
-    FloatingDiv.appendChild(Point);
-    Point.addEventListener('click', function(){
+    var EdgeGrid=document.createElement("BUTTON");
+    EdgeGrid.innerHTML="EDGE-GRID";    
+    EdgeGrid.className="button";
+    FloatingDiv.appendChild(EdgeGrid);
+    EdgeGrid.addEventListener('click', function(){
         var p=new nsPt(0,0,0); p.id=-1; // file : nsGeomLib.js
         var q=new nsPt(0,0,0); q.id=-1; // file : nsGeomLib.js
         var l=new nsLine(p,q); l.id=-1; // file : nsGeomLib.js
@@ -101,6 +111,7 @@ var createAlgMenu=function(){
     FloatingDiv.appendChild(endButton);
 
     document.getElementById("alg-menu").addEventListener('click', function(){
+        document.getElementById("floating-geom").style.display='none';
         FloatingDiv.style.display='block';
     }); 
 
