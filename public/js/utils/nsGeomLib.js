@@ -1,4 +1,7 @@
 
+
+//geometry primitive definitions
+
 var nsPt=function(x,y,z){
     this.name="POINT";
     this.x=x; //for 3d-viewer
@@ -9,8 +12,8 @@ var nsPt=function(x,y,z){
     this.cy=y; //for canvas
     this.cLe=50; //for canvas
     this.cWi=50; //for canvas
-    this.cr=20;//inner radius
-    this.cR=40;//outer radius
+    this.cr=10;//inner radius
+    this.cR=30;//outer radius
 
     this.selected=false; //slected in canvas
 
@@ -30,9 +33,9 @@ var nsPt=function(x,y,z){
             console.log("gen point");
         }
         if(this.x===0 && this.y===0 && this.z===0){
-            this.x=Math.random()*2+3;
-            this.y=Math.random()*2+3;
-            this.z=0;
+            this.x=nsRandRange(-5,5).toFixed(2);//file : nsRandom functions
+            this.y=nsRandRange(-5,5).toFixed(2);//file : nsRandom functions
+            this.z=nsRandRange(-5,5).toFixed(2);//file : nsRandom functions
         }
         this.geo=new THREE.SphereBufferGeometry(this.r,10,10);
         this.mat=new THREE.MeshBasicMaterial({

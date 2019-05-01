@@ -1,3 +1,7 @@
+
+
+// user interaction to detect the connection between elements 
+
 var setLine=function(obj){
     var tbl=document.getElementById("property-table");
     while (tbl.hasChildNodes()){
@@ -58,16 +62,22 @@ var setLine=function(obj){
             if(P.value.toUpperCase()===t){
                 obj.p=obj2;
                 P.value=obj2.name+""+obj2.id;
+                updateRelations(obj2,obj);//file: nsConnectElements.js
             }else if(startPt===t){
                 obj.p=obj2;
                 P.value=obj2.name+""+obj2.id;
+                updateRelations(obj2,obj);//file: nsConnectElements.js
             }
             else if(Q.value.toUpperCase()===t){
                 obj.q=obj2;
                 Q.value=obj2.name+""+obj2.id;
+                updateRelations(obj2,obj);//file: nsConnect Elements.js
             }else if(endPt===t){
                 obj.q=obj2;
                 Q.value=obj2.name+""+obj2.id;
+                updateRelations(obj2,obj);// file: nsConnectElement.js
+            }else{
+                //do nothing because nothing happened!
             }
         }
         obj.generateGeometry3d();
@@ -166,6 +176,7 @@ var setPoint=function(obj){
         if(!Number.isNaN(yval)){
             ry=yval;
         }
+
         if(!Number.isNaN(zval)){
             rz=zval;
         }

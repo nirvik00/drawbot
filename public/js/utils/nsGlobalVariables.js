@@ -7,6 +7,7 @@ var CANVAS, CANVASCONTEXT;
 var DRAGGING=false;
 var CONNECTING=false; var CONNECTINGLINE=[];
 var CANVASMSG="";
+var ELEMENTRELATIONS=[];
 
 
 var scene3d=document.getElementById('three-viewer'); //3js 

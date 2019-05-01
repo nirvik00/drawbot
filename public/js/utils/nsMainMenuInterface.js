@@ -1,4 +1,8 @@
 
+
+//create html, event listeners for the main menu
+
+
 var createMenu=function(){
     ELEMENTS=document.getElementById("elements");
     var FloatingDiv;
@@ -49,6 +53,8 @@ var createMenu=function(){
     }); 
     endButton.addEventListener('click', function(){
         FloatingDiv.style.display='none';
+        canvasUpdateConnections();
+        drawCanvas();
     });
     document.getElementById("connect-mode").addEventListener('click', function(){
         CONNECTING=true;

@@ -21,7 +21,7 @@ function mouseDownListener(e){
         var t=contains(obj,mx,my);
         if(t){ // if mouse in obj in canvas
             obj.selected=true;
-            constructProperty(obj   );//generate prop table
+            constructProperty(obj); //generate prop table
             break;
         }
         
@@ -39,12 +39,12 @@ function mouseDownListener(e){
             var obj=SceneElementsArr[i];
             if(obj.selected===true){
                 CONNECTINGLINE[0]=obj;
-                console.log("ini: "+obj.cx+","+obj.cy)
+                //console.log("ini: "+obj.cx+","+obj.cy)
                 break;                                                                                                                                  
             }
         }
     }
-    redrawCanvas();
+    //redrawCanvas();
 }
 
 function mouseUpListener(e){
@@ -105,6 +105,7 @@ function mouseMoveListener(e){
         var obj=SceneElementsArr[i];
         var t=contains(obj,mx,my);
         if(t){
+            redrawCanvas();
             constructProperty(obj);//generate prop table
         }
     }
@@ -143,7 +144,7 @@ function redrawCanvas(){
     }catch(err){
 
     }
-    
+    canvasUpdateConnections();// in file nsConnectElements
     canvasUpdateMsg();
 }
 
