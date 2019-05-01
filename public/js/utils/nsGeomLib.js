@@ -35,11 +35,11 @@ var nsPt=function(x,y,z){
         if(this.x===0 && this.y===0 && this.z===0){
             this.x=nsRandRange(-5,5).toFixed(2);//file : nsRandom functions
             this.y=nsRandRange(-5,5).toFixed(2);//file : nsRandom functions
-            this.z=nsRandRange(-5,5).toFixed(2);//file : nsRandom functions
+            this.z=3;//nsRandRange(-5,5).toFixed(2);//file : nsRandom functions
         }
         this.geo=new THREE.SphereBufferGeometry(this.r,10,10);
         this.mat=new THREE.MeshBasicMaterial({
-            color: new THREE.Color("rgb(255,0,0)")
+            color: new THREE.Color(this.colr)
         });
         var mesh=new THREE.Mesh(this.geo,this.mat);
         mesh.position.x=this.x;
@@ -72,7 +72,7 @@ var nsLine=function(p,q){
             this.mesh.material.dispose();
             scene.remove(this.mesh);
         }catch(e){
-            console.log("gen point");
+            // console.log("gen point");
         }
         if(this.p.x===0 && this.p.y===0 && this.p.z===0 && this.q.x===0 && this.q.y===0 && this.q.z===0){
             this.p.x=Math.random()*5;
@@ -131,6 +131,7 @@ var drawNodeGeom=function(obj){ //after dragging
     }
     //object text
     CANVASCONTEXT.globalAlpha=1.0;
+    CANVASCONTEXT.fillStyle="grey";
     CANVASCONTEXT.font = "10px Arial";
     CANVASCONTEXT.fillText(obj.name+""+obj.id, obj.cx,obj.cy);
 }
@@ -144,6 +145,13 @@ this.contains=function(obj,mx,my){
 
 var dis2=function(x,y,a,b){
     return Math.sqrt( (x-a)*(x-a) + (y-b)*(y-b) );
+}
+
+var dis=function(p,q){
+    a=q.x-p.x;
+    b=q.y-p.y;
+    c=q.z-p.z;
+    return Math.sqrt(a*a+b*b+c*c);
 }
 
 var Di=function(a,b){

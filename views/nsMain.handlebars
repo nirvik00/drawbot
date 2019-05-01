@@ -74,10 +74,11 @@ the geometry menu is generated at nsMainMenuInterface.js
         background-color:red;
     }
     #property-table{
-        border:1px solid black;
+        border:1px solid white;
         border-width:3px; 
         padding: 10px;
-        background-color:rgb(255,255,255);
+        background-color:rgb(0,0,0);
+        color:white;
     }
 </style>
 
@@ -91,9 +92,12 @@ the geometry menu is generated at nsMainMenuInterface.js
 
     <div id="menu">
         <p class="elements-menu" id="geom-menu">&nbsp; GEOMETRY</p>
+        <br>
         <p class="elements-menu" id="alg-menu">&nbsp; ALGORITHMS</p>
+        <br>
         <p class="elements-menu" id="drag-mode">&nbsp;mode-DRAG</p>
         <p class="elements-menu" id="connect-mode">&nbsp;mode-CONNECT</p>
+        <br>
         <p class="elements-menu"  id="hide-menu">&nbsp;HIDE MENU</p>
     </div>
 
@@ -110,6 +114,7 @@ the geometry menu is generated at nsMainMenuInterface.js
 <script src="/public/js/utils/nsRandomFunctions.js"></script>
 <script src="/public/js/utils/nsGlobalVariables.js"></script>
 <script src="/public/js/utils/nsGeomLib.js"></script>
+<script src="/public/js/utils/nsAlgLib.js"></script>
 <script src="/public/js/utils/nsUpdateProp.js"></script>
 <script src="/public/js/utils/nsConnectElements.js"></script>
 <script src="/public/js/utils/nsMainMenuInterface.js"></script> 

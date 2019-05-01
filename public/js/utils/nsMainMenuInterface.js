@@ -18,8 +18,8 @@ var createGeomMenu=function(){
     Point.addEventListener('click', function(){
         var p=new nsPt(0,0,0); // file : nsGeomLib.js
         p.id=ElementCounter; // file: nsGlobalVariable.js
-        p.generateGeometry3d(); // file : nsGeomLib.js
-        initNodeGeom(p); // file : nsGeomLib.js
+        p.generateGeometry3d(); // file : nsGeomLib.js = 3DVIEWER
+        initNodeGeom(p); // file : nsGeomLib.js = CANVAS
         SceneElementsArr.push(p); // file: nsGlobalVariable.js
         ElementCounter++; // file: nsGlobalVariable.js
     });
@@ -32,9 +32,9 @@ var createGeomMenu=function(){
         var p=new nsPt(0,0,0); p.id=-1; // file : nsGeomLib.js
         var q=new nsPt(0,0,0); q.id=-1; // file : nsGeomLib.js
         var l=new nsLine(p,q); // file : nsGeomLib.js
-        l.generateGeometry3d(); // file : nsGeomLib.js
+        l.generateGeometry3d(); // file : nsGeomLib.js = 3DVIEWER
         l.id=ElementCounter; // file: nsGlobalVariable.js
-        initNodeGeom(l); // file : nsGeomLib.js
+        initNodeGeom(l); // file : nsGeomLib.js = CANVAS
         SceneElementsArr.push(l); // file: nsGlobalVariable.js
         ElementCounter++; // file: nsGlobalVariable.js
     });
@@ -80,14 +80,17 @@ var createAlgMenu=function(){
     document.body.appendChild(FloatingDiv);
     
     var Point=document.createElement("BUTTON");
-    Point.innerHTML="EDGE-GRID";
+    Point.innerHTML="EDGE-GRID";    
     Point.className="button";
     FloatingDiv.appendChild(Point);
     Point.addEventListener('click', function(){
-        var p=new nsPt(0,0,0); // file : nsGeomLib.js
-        p.id=ElementCounter; // file: nsGlobalVariable.js
-        initNodeGeom(p); // file : nsGeomLib.js
-        SceneElementsArr.push(p); // file: nsGlobalVariable.js
+        var p=new nsPt(0,0,0); p.id=-1; // file : nsGeomLib.js
+        var q=new nsPt(0,0,0); q.id=-1; // file : nsGeomLib.js
+        var l=new nsLine(p,q); l.id=-1; // file : nsGeomLib.js
+        var a=new nsEdgeGridAlg("EdgeGrid", p, q, l); // file : nsAlgLib.js
+        a.id=ElementCounter; // file: nsGlobalVariable.js
+        initNodeGeom(a); // file : nsGeomLib.js = CANVAS
+        SceneElementsArr.push(a); // file: nsGlobalVariable.js
         ElementCounter++; // file: nsGlobalVariable.js
     });
 

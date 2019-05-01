@@ -26,7 +26,7 @@ function mouseDownListener(e){
         var t=contains(obj,mx,my);
         if(t){ // if mouse in obj in canvas
             obj.selected=true;
-            constructProperty(obj); //generate prop table
+            constructProperty(obj); //file : this; generate prop table
             break;
         }
         
@@ -155,9 +155,11 @@ function redrawCanvas(){
 
 var constructProperty= function(obj){   
     if(obj.name==="POINT"){
-        setPoint(obj); // file : nsUpdateProp.js
+        genHTMLPropsForSetPoint(obj); // file : nsUpdateProp.js
     }else if(obj.name==="LINE"){
-        setLine(obj); // file : nsUpdateProp.js
+        genHTMLPropsForSetLine(obj); // file : nsUpdateProp.js
+    }else if(obj.name==='EDGEGRID'){
+        genHTMLPropsForEdgeGrid(obj); // file : nsUpdateProp.js
     }
 } 
 
