@@ -41,12 +41,12 @@ var nsPt=function(x,y,z){
         this.mat=new THREE.MeshBasicMaterial({
             color: new THREE.Color(this.colr)
         });
-        var mesh=new THREE.Mesh(this.geo,this.mat);
-        mesh.position.x=this.x;
-        mesh.position.y=this.y;
-        mesh.position.z=this.z;
-        scene.add(mesh);
-        this.mesh=mesh;
+        this.mesh=new THREE.Mesh(this.geo,this.mat);
+        this.mesh.position.x=this.x;
+        this.mesh.position.y=this.y;
+        this.mesh.position.z=this.z;
+        scene.add(this.mesh);
+        return this.mesh;
     }    
 }
 

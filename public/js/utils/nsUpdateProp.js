@@ -229,6 +229,17 @@ var genHTMLPropsForEdgeGrid=function(obj){
     // dynamically generate select-options of all points
     trQ.appendChild(gethtmlSelectOptFromArrId(ptObjArr,"endPt")); 
 
+
+    var trNum=document.createElement("tr");
+    var tdNum0=document.createElement("td")
+    var tdNum=document.createElement("input");
+    tdNum0.innerHTML="Enter number";
+    tdNum.setAttribute("type", "number");
+    tdNum.value=obj.num;
+    tbl.appendChild(trNum);
+    trNum.appendChild(tdNum0);
+    trNum.appendChild(tdNum);
+
     var trEnd=document.createElement("tr");
     var submit=document.createElement("button");
     submit.innerHTML="SUBMIT";
@@ -264,6 +275,11 @@ var genHTMLPropsForEdgeGrid=function(obj){
                 //do nothing because nothing happened!
             }
         }
+        var num=parseInt(tdNum.value);
+        if(num>0){
+            obj.num=num;
+        }
+        
         obj.generateGeometry3d(); // file : same
         updateElementChanges(); // file: nsUpdateProp.js
     });
