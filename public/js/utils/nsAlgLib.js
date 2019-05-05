@@ -183,3 +183,23 @@ function BezierCurve3pt(name, p, q, r){
     this.rad3d=0.1; //for scene 3d
     this.num=10; //number of interp points
 }
+
+function subdivision(){
+    this.id=-1;
+    this.name=name.trim().toUpperCase();
+    this.cx=0; //for canvas
+    this.cy=0; //for canvas
+    this.cLe=30; //for canvas
+    this.cWi=50; //for canvas
+    this.cr=10;//inner radius
+    this.cR=30;//outer radius
+    this.colr="rgb(100,100,100)";
+    
+    this.p=p;//start-point
+    this.q=q;//end-point
+    this.Edge=l;//edge
+
+    this.colr3d="rgb(0,0,0)"; //for scene 3d
+    this.rad3d=0.1; //for scene 3d
+    this.num=10; //number of interp points
+}
